@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FurnitureOrdering</string>
+    <string name="make_order">Make order</string>
 </resources>
