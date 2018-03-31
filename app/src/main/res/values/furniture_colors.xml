@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="first_color">#c8dbe1</color>
+    <color name="second_color">#b6c1c0</color>
+    <color name="third_color">#a2a39d</color>
+    <color name="fourth_color">#ce8036</color>
+    <color name="fifth_color">#bf6248</color>
+    <color name="sixth_color">#b23342</color>
+    <color name="seventh_color">#8a323e</color>
+    <color name="eighth_color">#974792</color>
+    <color name="nineth_color">#833565</color>
+    <color name="tenth_color">#84ac6c</color>
+    <color name="eleventh_color">#5d7d40</color>
+    <color name="twelveth_color">#11358c</color>
+
+</resources>

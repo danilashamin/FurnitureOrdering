@@ -10,12 +10,6 @@
         android:id="@+id/fieldForFurniture"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +28,33 @@
         app:layout_constraintBottom_toBottomOf="@+id/fieldForFurniture"
         app:layout_constraintStart_toStartOf="@+id/fieldForFurniture"
         app:layout_constraintTop_toTopOf="@+id/fieldForFurniture" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_camera_alt"
+        app:layout_constraintBottom_toBottomOf="@+id/fieldForFurniture"
+        app:layout_constraintEnd_toEndOf="@+id/fieldForFurniture"
+        app:layout_constraintTop_toTopOf="@+id/fieldForFurniture" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="10"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -58,7 +79,7 @@
                 android:id="@+id/tvMattressCounter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="10"
+                android:text="0"
                 android:textAlignment="center" />
 
             <ImageView
@@ -87,7 +108,7 @@
                 android:id="@+id/tvPuffCounter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="10"
+                android:text="0"
                 android:textAlignment="center" />
 
             <ImageView
@@ -113,7 +134,7 @@
                 android:id="@+id/tvCushionCounter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="10"
+                android:text="0"
                 android:textAlignment="center" />
 
             <ImageView

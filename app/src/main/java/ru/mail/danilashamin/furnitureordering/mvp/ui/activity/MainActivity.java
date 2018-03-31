@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -53,10 +55,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void addFurnitureOnScreen(FurnitureType type) {
         ImageView furniture = new ImageView(this);
@@ -81,8 +81,18 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
     @Override
-    public void dragView(View dragView, MotionEvent event) {
+    public void setMattressCounter(Integer mattressCounter) {
+        tvMattressCounter.setText(String.valueOf(mattressCounter));
+    }
 
+    @Override
+    public void setPuffCounter(Integer puffCounter) {
+        tvPuffCounter.setText(String.valueOf(puffCounter));
+    }
+
+    @Override
+    public void setCushionCounter(Integer cushionCounter) {
+        tvCushionCounter.setText(String.valueOf(cushionCounter));
     }
 
 
