@@ -6,11 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".mvp.ui.activity.MainActivity">
 
+    <LinearLayout
+        android:id="@+id/fieldForFurniture"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
-        android:id="@+id/ivUserPhoto"
-        android:layout_width="match_parent"
+        android:id="@+id/ivTrashCan"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_delete_forever"
+        app:layout_constraintBottom_toBottomOf="@+id/fieldForFurniture"
+        app:layout_constraintStart_toStartOf="@+id/fieldForFurniture"
+        app:layout_constraintTop_toTopOf="@+id/fieldForFurniture" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -87,7 +110,7 @@
             app:layout_constraintStart_toEndOf="@+id/linearLayout5">
 
             <TextView
-                android:id="@+id/cushionCounter"
+                android:id="@+id/tvCushionCounter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="10"
