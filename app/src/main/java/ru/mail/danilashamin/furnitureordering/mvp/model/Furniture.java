@@ -8,6 +8,7 @@ public class Furniture {
     private int ID;
     private FrameLayout.LayoutParams layoutParams;
     private int color;
+    private OnFurnitureColorChangedListener listener;
 
     public Furniture(FurnitureType type, int ID) {
         this.type = type;
@@ -31,5 +32,16 @@ public class Furniture {
 
     public FrameLayout.LayoutParams getLayoutParams() {
         return layoutParams;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+        if (listener != null) {
+            listener.onColorChanged(color);
+        }
+    }
+
+    public void setOnFurnitureColorChangeListener(OnFurnitureColorChangedListener listener) {
+        this.listener = listener;
     }
 }

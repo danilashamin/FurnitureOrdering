@@ -1,5 +1,8 @@
 package ru.mail.danilashamin.furnitureordering.mvp.presentation.presenter;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
@@ -16,6 +19,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
     private Integer mattressCounter = 0, puffCounter = 0, cushionCounter = 0;
 
     private List<Furniture> furnitures;
+    private Drawable backgroundPhoto;
 
     public MainPresenter() {
         furnitures = new ArrayList<>();
@@ -39,6 +43,18 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().addFurnitureOnScreen(furnitures.get(furnitures.size() - 1));
     }
 
+    public void setBackgroundPhoto(Drawable backgroundPhoto) {
+        this.backgroundPhoto = backgroundPhoto;
+        getViewState().setBackgroundPhoto(backgroundPhoto);
+    }
+
+    public void showColorPickerDialog() {
+        getViewState().showColorPickerDialog();
+    }
+
+    public void dismissColorPickerDialog() {
+       getViewState().dismissColorPickerDialog();
+    }
 
     public void buy() {
 

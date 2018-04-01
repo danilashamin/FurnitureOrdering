@@ -2,10 +2,10 @@ package ru.mail.danilashamin.furnitureordering.mvp.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -49,16 +49,14 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     ImageView ivTrashCan;
     @BindView(R.id.tvPrice)
     TextView tvPrice;
+    @BindView(R.id.btnColorPick)
+    ImageView btnColorPick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-
     }
 
     @Override
@@ -71,6 +69,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @Override
     public void addFurnitureOnScreen(Furniture furniture) {
         FurnitureView furnitureView = new FurnitureView(this, furniture);
+        furnitureView.setOnTouchListener(new OnFurnitureTouchListener(furniture));
         fieldForFurniture.addView(furnitureView);
     }
 
@@ -87,6 +86,20 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @Override
     public void setCushionCounter(Integer cushionCounter) {
         tvCushionCounter.setText(String.valueOf(cushionCounter));
+    }
+
+    @Override
+    public void setBackgroundPhoto(Drawable photo) {
+        fieldForFurniture.setBackground(photo);
+    }
+
+    @Override
+    public void showColorPickerDialog() {
+    }
+
+    @Override
+    public void dismissColorPickerDialog() {
+
     }
 
 
@@ -108,6 +121,65 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @OnClick(R.id.btnBuy)
     public void onBtnBuyClicked() {
         mainPresenter.buy();
+    }
+
+
+
+    @OnClick(R.id.btnColorPick)
+    public void onBtnColorPickClicked() {
+        mainPresenter.showColorPickerDialog();
+    }
+
+
+    public class OnFurnitureTouchListener implements View.OnTouchListener {
+        private int _xDelta;
+        private int _yDelta;
+        private Furniture furniture;
+
+        OnFurnitureTouchListener(Furniture furniture) {
+            this.furniture = furniture;
+        }
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            final int X = (int) event.getRawX();
+            final int Y = (int) event.getRawY();
+            switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                case MotionEvent.ACTION_DOWN:
+                    FrameLayout.LayoutParams lParams = (FrameLayout.LayoutParams) v.getLayoutParams();
+                    _xDelta = X - lParams.leftMargin;
+                    _yDelta = Y - lParams.topMargin;
+                    break;
+                case MotionEvent.ACTION_UP:
+                    break;
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    if (containsView(v)) {
+                        fieldForFurniture.removeView(v);
+                    }
+                    break;
+                case MotionEvent.ACTION_POINTER_UP:
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    FrameLayout.LayoutParams layoutParams = setLayoutParams(X, Y, v);
+                    furniture.setLayoutParams(layoutParams);
+                    v.setLayoutParams(layoutParams);
+                    if (containsView(v)) {
+                        ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever_activated));
+                    }
+                    break;
+            }
+
+            return true;
+        }
+
+        private FrameLayout.LayoutParams setLayoutParams(int X, int Y, View v) {
+            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) v.getLayoutParams();
+            layoutParams.leftMargin = X - _xDelta;
+            layoutParams.topMargin = Y - _yDelta;
+            layoutParams.rightMargin = -250;
+            layoutParams.bottomMargin = -250;
+            return layoutParams;
+        }
     }
 
     public boolean containsView(View draggedView) {

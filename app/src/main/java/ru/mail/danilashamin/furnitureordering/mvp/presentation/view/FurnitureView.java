@@ -14,7 +14,6 @@ import java.util.Locale;
 
 import ru.mail.danilashamin.furnitureordering.R;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
-import ru.mail.danilashamin.furnitureordering.mvp.model.OnFurnitureTouchListener;
 
 public class FurnitureView extends AppCompatImageView {
     private Furniture furniture;
@@ -57,9 +56,15 @@ public class FurnitureView extends AppCompatImageView {
 
         bitmap = Bitmap.createScaledBitmap(bitmap, furniture.getLayoutParams().width, furniture.getLayoutParams().height, true);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.fourth_color), PorterDuff.Mode.MULTIPLY));
-        setOnTouchListener(new OnFurnitureTouchListener(furniture));
+        setColorFilterOnBitmap(getResources().getColor(R.color.first_color));
+
+        furniture.setOnFurnitureColorChangeListener(this::setColorFilterOnBitmap);
     }
+
+    private void setColorFilterOnBitmap(int color) {
+        paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+    }
+
 
     @Override
     public boolean performClick() {

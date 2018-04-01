@@ -1,5 +1,7 @@
 package ru.mail.danilashamin.furnitureordering.mvp.presentation.view;
 
+import android.graphics.drawable.Drawable;
+
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy;
@@ -20,5 +22,11 @@ public interface MainView extends MvpView {
     @StateStrategyType(AddToEndSingleStrategy.class)
     void setCushionCounter(Integer cushionCounter);
 
+    @StateStrategyType(AddToEndSingleStrategy.class)
+    void setBackgroundPhoto(Drawable photo);
+
+    void showColorPickerDialog();
+
+    void dismissColorPickerDialog();
 
 }
