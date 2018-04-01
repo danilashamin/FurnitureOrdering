@@ -28,9 +28,20 @@ public interface MainView extends MvpView {
     @StateStrategyType(AddToEndStrategy.class)
     void deleteFurnitureView(Furniture furnitureForDelete);
 
+    @StateStrategyType(AddToEndStrategy.class)
     void showColorPickerDialog();
 
+    @StateStrategyType(AddToEndStrategy.class)
     void dismissColorPickerDialog();
 
+    @StateStrategyType(AddToEndStrategy.class)
     void changeCurrentFurnitureColor(int color);
+
+    @StateStrategyType(AddToEndSingleStrategy.class)
+    void startCamera();
+
+    @StateStrategyType(AddToEndSingleStrategy.class)
+    void stopCamera();
+
+    void deleteAllFurniture();
 }

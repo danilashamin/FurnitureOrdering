@@ -1,7 +1,7 @@
 package ru.mail.danilashamin.furnitureordering.mvp.ui.activity;
 
-import android.annotation.SuppressLint;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.otaliastudios.cameraview.CameraListener;
+import com.otaliastudios.cameraview.CameraUtils;
+import com.otaliastudios.cameraview.CameraView;
 
 import java.util.Locale;
 
@@ -35,8 +38,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @InjectPresenter
     MainPresenter mainPresenter;
 
-    @BindView(R.id.fieldForFurniture)
-    FrameLayout fieldForFurniture;
+    @BindView(R.id.photoView)
+    CameraView photoView;
     @BindView(R.id.tvMattressCounter)
     TextView tvMattressCounter;
     @BindView(R.id.btnAddMattress)
@@ -57,6 +60,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     TextView tvPrice;
     @BindView(R.id.btnColorPick)
     ImageView btnColorPick;
+    @BindView(R.id.btnCamera)
+    ImageView btnCamera;
+    @BindView(R.id.fieldForFurniture)
+    FrameLayout fieldForFurniture;
 
     private ColorPickerDialog colorPickerDialog;
 
@@ -77,12 +84,29 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                 mainPresenter.dismissColorPickerDialog();
             }
         });
+        photoView.addCameraListener(new CameraListener() {
+            @Override
+            public void onPictureTaken(byte[] jpeg) {
+                CameraUtils.decodeBitmap(jpeg,
+                        bitmap -> {
+                            mainPresenter.stopCamera();
+                            mainPresenter.setBackgroundPhoto(new BitmapDrawable(getResources(), bitmap));
+                        });
+            }
+        });
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        photoView.stop();
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
+    protected void onDestroy() {
+        super.onDestroy();
+        photoView.destroy();
     }
 
     @Override
@@ -110,7 +134,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void setBackgroundPhoto(Drawable photo) {
-        fieldForFurniture.setBackground(photo);
+        photoView.setBackground(photo);
     }
 
 
@@ -139,6 +163,26 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         }
     }
 
+    @Override
+    public void startCamera() {
+        photoView.start();
+        btnCamera.setOnClickListener(v -> {
+                    photoView.capturePicture();
+                    btnCamera.setOnClickListener(v1 -> mainPresenter.startCamera());
+                }
+        );
+    }
+
+    @Override
+    public void stopCamera() {
+        photoView.stop();
+    }
+
+    @Override
+    public void deleteAllFurniture() {
+        fieldForFurniture.removeAllViews();
+    }
+
 
     @OnClick(R.id.btnAddMattress)
     public void onBtnAddMattressClicked() {
@@ -164,6 +208,16 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @OnClick(R.id.btnColorPick)
     public void onBtnColorPickClicked() {
         mainPresenter.showColorPickerDialog();
+    }
+
+    @OnClick(R.id.btnCamera)
+    public void onCameraBtnClicked() {
+        mainPresenter.startCamera();
+    }
+
+    @OnClick(R.id.ivTrashCan)
+    public void onTrashCanClicked() {
+        mainPresenter.deleteAllFurniture();
     }
 
 
