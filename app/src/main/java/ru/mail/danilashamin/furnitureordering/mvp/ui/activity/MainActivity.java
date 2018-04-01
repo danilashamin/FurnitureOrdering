@@ -1,29 +1,28 @@
 package ru.mail.danilashamin.furnitureordering.mvp.ui.activity;
 
-import android.annotation.SuppressLint;
+import android.graphics.Rect;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.mail.danilashamin.furnitureordering.R;
-import ru.mail.danilashamin.furnitureordering.mvp.model.DragListener;
+import ru.mail.danilashamin.furnitureordering.mvp.model.OnFurnitureDragListener;
+import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
+import ru.mail.danilashamin.furnitureordering.mvp.model.OnFurnitureTouchListener;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.presenter.MainPresenter;
+import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.FurnitureView;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView {
@@ -32,7 +31,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     MainPresenter mainPresenter;
 
     @BindView(R.id.fieldForFurniture)
-    LinearLayout fieldForFurniture;
+    RelativeLayout fieldForFurniture;
     @BindView(R.id.tvMattressCounter)
     TextView tvMattressCounter;
     @BindView(R.id.btnAddMattress)
@@ -47,6 +46,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     ImageView btnAddCushion;
     @BindView(R.id.btnBuy)
     Button btnBuy;
+    @BindView(R.id.ivTrashCan)
+    ImageView ivTrashCan;
+    @BindView(R.id.tvPrice)
+    TextView tvPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,29 +58,26 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+
     }
 
     @Override
-    public void addFurnitureOnScreen(FurnitureType type) {
-        ImageView furniture = new ImageView(this);
-        switch (type) {
-            case PUFF:
-                furniture.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
-                break;
-            case CUSHION:
-                furniture.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
-                break;
-            case MATTRESS:
-                furniture.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
-                break;
-        }
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    public void addFurnitureOnScreen(Furniture furniture) {
+        FurnitureView furnitureView = new FurnitureView(this, furniture);
         WindowManager.LayoutParams imageViewLayoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         imageViewLayoutParams.width = 100;
         imageViewLayoutParams.height = 100;
-        imageViewLayoutParams.gravity = Gravity.CENTER;
-        furniture.setLayoutParams(imageViewLayoutParams);
-        furniture.setOnTouchListener(new DragListener());
-        fieldForFurniture.addView(furniture);
+        furnitureView.setLayoutParams(imageViewLayoutParams);
+        furnitureView.setOnLongClickListener(new OnFurnitureTouchListener());
+        furnitureView.setOnDragListener(new OnFurnitureDragListener());
+        fieldForFurniture.addView(furnitureView);
     }
 
     @Override
@@ -114,5 +114,20 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @OnClick(R.id.btnBuy)
     public void onBtnBuyClicked() {
         mainPresenter.buy();
+    }
+
+    public boolean containsView(View draggedView) {
+        // Create the Rect for the view where items will be dropped
+        int[] pointA = new int[2];
+        ivTrashCan.getLocationOnScreen(pointA);
+        Rect rectA = new Rect(pointA[0], pointA[1], pointA[0] + ivTrashCan.getWidth(), pointA[1] + ivTrashCan.getHeight());
+
+        // Create the Rect for the view been dragged
+        int[] pointB = new int[2];
+        draggedView.getLocationOnScreen(pointB);
+        Rect rectB = new Rect(pointB[0], pointB[1], pointB[0] + draggedView.getWidth(), pointB[1] + draggedView.getHeight());
+
+        // Check if the dropzone currently contains the dragged view
+        return rectA.contains(rectB);
     }
 }

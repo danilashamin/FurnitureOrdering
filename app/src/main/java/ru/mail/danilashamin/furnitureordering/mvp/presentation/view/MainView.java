@@ -5,11 +5,11 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
-import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
+import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 
 public interface MainView extends MvpView {
     @StateStrategyType(AddToEndStrategy.class)
-    void addFurnitureOnScreen(FurnitureType type);
+    void addFurnitureOnScreen(Furniture furniture);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
     void setMattressCounter(Integer mattressCounter);
