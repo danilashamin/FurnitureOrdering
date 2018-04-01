@@ -1,16 +1,50 @@
 package ru.mail.danilashamin.furnitureordering.mvp.model;
 
-import android.content.ClipData;
-import android.content.ClipDescription;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 
-public class OnFurnitureTouchListener implements View.OnLongClickListener {
+public class OnFurnitureTouchListener implements View.OnTouchListener {
+    private int _xDelta;
+    private int _yDelta;
+    private Furniture furniture;
+
+    public OnFurnitureTouchListener(Furniture furniture) {
+        this.furniture = furniture;
+    }
+
     @Override
-    public boolean onLongClick(View v) {
-        ClipData.Item item = new ClipData.Item((String) v.getTag());
-        ClipData dragData = new ClipData((String) v.getTag(), new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN}, item);
-        View.DragShadowBuilder dragShadowBuilder = new View.DragShadowBuilder();
-        v.startDrag(dragData, dragShadowBuilder, null, 0);
+    public boolean onTouch(View v, MotionEvent event) {
+        final int X = (int) event.getRawX();
+        final int Y = (int) event.getRawY();
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_DOWN:
+                FrameLayout.LayoutParams lParams = (FrameLayout.LayoutParams) v.getLayoutParams();
+                _xDelta = X - lParams.leftMargin;
+                _yDelta = Y - lParams.topMargin;
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                break;
+            case MotionEvent.ACTION_POINTER_UP:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                FrameLayout.LayoutParams layoutParams = setLayoutParams(X, Y, v);
+                furniture.setLayoutParams(layoutParams);
+                v.setLayoutParams(layoutParams);
+                break;
+        }
+
         return true;
+    }
+
+    private FrameLayout.LayoutParams setLayoutParams(int X, int Y, View v) {
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) v.getLayoutParams();
+        layoutParams.leftMargin = X - _xDelta;
+        layoutParams.topMargin = Y - _yDelta;
+        layoutParams.rightMargin = -250;
+        layoutParams.bottomMargin = -250;
+        return layoutParams;
     }
 }

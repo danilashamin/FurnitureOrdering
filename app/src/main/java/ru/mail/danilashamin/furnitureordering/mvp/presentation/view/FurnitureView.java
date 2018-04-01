@@ -1,19 +1,27 @@
 package ru.mail.danilashamin.furnitureordering.mvp.presentation.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.view.WindowManager;
 
 import java.util.Locale;
 
 import ru.mail.danilashamin.furnitureordering.R;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
-import ru.mail.danilashamin.furnitureordering.mvp.model.OnFurnitureDragListener;
+import ru.mail.danilashamin.furnitureordering.mvp.model.OnFurnitureTouchListener;
 
 public class FurnitureView extends AppCompatImageView {
     private Furniture furniture;
     private static final String FURNITURE_VIEW_TAG = "FURNITURE_VIEW_";
+
+    private Bitmap bitmap;
+    private Paint paint;
 
     public FurnitureView(Context context, Furniture furniture) {
         super(context);
@@ -35,21 +43,31 @@ public class FurnitureView extends AppCompatImageView {
     private void init() {
         switch (furniture.getType()) {
             case PUFF:
-                setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 break;
             case CUSHION:
-                setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                bringToFront();
                 break;
             case MATTRESS:
-                setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 break;
         }
         setLayoutParams(furniture.getLayoutParams());
-        setOnTouchListener(new OnFurnitureDragListener(furniture));
+
+        bitmap = Bitmap.createScaledBitmap(bitmap, furniture.getLayoutParams().width, furniture.getLayoutParams().height, true);
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.fourth_color), PorterDuff.Mode.MULTIPLY));
+        setOnTouchListener(new OnFurnitureTouchListener(furniture));
     }
 
     @Override
     public boolean performClick() {
         return super.performClick();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.drawBitmap(bitmap, 0, 0, paint);
     }
 }

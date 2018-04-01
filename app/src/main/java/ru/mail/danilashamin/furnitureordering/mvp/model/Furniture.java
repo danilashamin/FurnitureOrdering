@@ -7,6 +7,7 @@ public class Furniture {
     private FurnitureType type;
     private int ID;
     private FrameLayout.LayoutParams layoutParams;
+    private int color;
 
     public Furniture(FurnitureType type, int ID) {
         this.type = type;
