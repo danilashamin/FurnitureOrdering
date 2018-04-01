@@ -17,7 +17,7 @@ import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 
 public class FurnitureView extends AppCompatImageView {
     private Furniture furniture;
-    private static final String FURNITURE_VIEW_TAG = "FURNITURE_VIEW_";
+    public static final String FURNITURE_VIEW_TAG = "FURNITURE_VIEW_";
 
     private Bitmap bitmap;
     private Paint paint;
@@ -74,5 +74,9 @@ public class FurnitureView extends AppCompatImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(bitmap, 0, 0, paint);
+    }
+
+    public Furniture getFurniture() {
+        return furniture;
     }
 }

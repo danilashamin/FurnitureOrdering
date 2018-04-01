@@ -18,17 +18,17 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     private Integer mattressCounter = 0, puffCounter = 0, cushionCounter = 0;
 
-    private List<Furniture> furnitures;
     private Drawable backgroundPhoto;
+    private int furnitureCounter;
+    private Furniture currentFurniture;
 
     public MainPresenter() {
-        furnitures = new ArrayList<>();
+        furnitureCounter = 0;
     }
 
 
     public void addFurniture(FurnitureType type) {
-        furnitures.add(new Furniture(type, furnitures.size()));
-
+        Furniture furniture = new Furniture(type, ++furnitureCounter);
         switch (type) {
             case MATTRESS:
                 getViewState().setMattressCounter(++mattressCounter);
@@ -40,7 +40,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 getViewState().setPuffCounter(++puffCounter);
                 break;
         }
-        getViewState().addFurnitureOnScreen(furnitures.get(furnitures.size() - 1));
+        getViewState().addFurnitureOnScreen(furniture);
     }
 
     public void setBackgroundPhoto(Drawable backgroundPhoto) {
@@ -48,12 +48,24 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().setBackgroundPhoto(backgroundPhoto);
     }
 
-    public void showColorPickerDialog() {
-        getViewState().showColorPickerDialog();
+
+    public void setCurrentFurniture(Furniture currentFurniture) {
+        this.currentFurniture = currentFurniture;
     }
 
-    public void dismissColorPickerDialog() {
-       getViewState().dismissColorPickerDialog();
+    public void deleteFurniture(Furniture furnitureForDelete) {
+        switch (furnitureForDelete.getType()) {
+            case MATTRESS:
+                getViewState().setMattressCounter(--mattressCounter);
+                break;
+            case CUSHION:
+                getViewState().setCushionCounter(--cushionCounter);
+                break;
+            case PUFF:
+                getViewState().setPuffCounter(--puffCounter);
+                break;
+        }
+        getViewState().deleteFurnitureView(furnitureForDelete);
     }
 
     public void buy() {

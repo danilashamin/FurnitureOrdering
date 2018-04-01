@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -23,6 +25,8 @@ import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.presenter.MainPresenter;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.FurnitureView;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
+
+import static ru.mail.danilashamin.furnitureordering.mvp.presentation.view.FurnitureView.FURNITURE_VIEW_TAG;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView {
 
@@ -93,13 +97,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         fieldForFurniture.setBackground(photo);
     }
 
-    @Override
-    public void showColorPickerDialog() {
-    }
 
     @Override
-    public void dismissColorPickerDialog() {
-
+    public void deleteFurnitureView(Furniture furnitureForDelete) {
+        fieldForFurniture.removeView(fieldForFurniture.findViewWithTag(String.format(Locale.getDefault(), "%s%d", FURNITURE_VIEW_TAG, furnitureForDelete.getID())));
+        ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever));
     }
 
 
@@ -124,10 +126,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
 
-
     @OnClick(R.id.btnColorPick)
     public void onBtnColorPickClicked() {
-        mainPresenter.showColorPickerDialog();
+
     }
 
 
@@ -146,16 +147,19 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
             final int Y = (int) event.getRawY();
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
+
                     FrameLayout.LayoutParams lParams = (FrameLayout.LayoutParams) v.getLayoutParams();
                     _xDelta = X - lParams.leftMargin;
                     _yDelta = Y - lParams.topMargin;
+
+                    mainPresenter.setCurrentFurniture(((FurnitureView) v).getFurniture());
                     break;
                 case MotionEvent.ACTION_UP:
+                    if (doViewsIntersect(v, ivTrashCan)) {
+                        mainPresenter.deleteFurniture(((FurnitureView) v).getFurniture());
+                    }
                     break;
                 case MotionEvent.ACTION_POINTER_DOWN:
-                    if (containsView(v)) {
-                        fieldForFurniture.removeView(v);
-                    }
                     break;
                 case MotionEvent.ACTION_POINTER_UP:
                     break;
@@ -163,9 +167,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                     FrameLayout.LayoutParams layoutParams = setLayoutParams(X, Y, v);
                     furniture.setLayoutParams(layoutParams);
                     v.setLayoutParams(layoutParams);
-                    if (containsView(v)) {
-                        ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever_activated));
-                    }
+                    changeTrashCanIcon(v);
                     break;
             }
 
@@ -182,18 +184,24 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         }
     }
 
-    public boolean containsView(View draggedView) {
-        // Create the Rect for the view where items will be dropped
-        int[] pointA = new int[2];
-        ivTrashCan.getLocationOnScreen(pointA);
-        Rect rectA = new Rect(pointA[0], pointA[1], pointA[0] + ivTrashCan.getWidth(), pointA[1] + ivTrashCan.getHeight());
-
-        // Create the Rect for the view been dragged
-        int[] pointB = new int[2];
-        draggedView.getLocationOnScreen(pointB);
-        Rect rectB = new Rect(pointB[0], pointB[1], pointB[0] + draggedView.getWidth(), pointB[1] + draggedView.getHeight());
-
-        // Check if the dropzone currently contains the dragged view
-        return rectA.contains(rectB);
+    public void changeTrashCanIcon(View v) {
+        if (doViewsIntersect(v, ivTrashCan)) {
+            ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever_activated));
+        } else {
+            ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever));
+        }
     }
+
+    private boolean doViewsIntersect(View dropTarget, View item) {
+        Rect dropRect = getScreenBounds(dropTarget);
+        Rect itemRect = getScreenBounds(item);
+        return Rect.intersects(dropRect, itemRect);
+    }
+
+    private Rect getScreenBounds(View view) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        return new Rect(location[0], location[1], location[0] + view.getWidth(), location[1] + view.getHeight());
+    }
+
 }

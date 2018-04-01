@@ -8,6 +8,7 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
+import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
 
 public interface MainView extends MvpView {
     @StateStrategyType(AddToEndStrategy.class)
@@ -25,8 +26,6 @@ public interface MainView extends MvpView {
     @StateStrategyType(AddToEndSingleStrategy.class)
     void setBackgroundPhoto(Drawable photo);
 
-    void showColorPickerDialog();
-
-    void dismissColorPickerDialog();
+    void deleteFurnitureView(Furniture furnitureForDelete);
 
 }
