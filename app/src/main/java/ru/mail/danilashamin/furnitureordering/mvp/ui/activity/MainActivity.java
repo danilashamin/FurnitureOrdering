@@ -25,6 +25,8 @@ import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.presenter.MainPresenter;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.FurnitureView;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
+import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.ColorPickerDialog;
+import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.ColorPickerDialogListener;
 
 import static ru.mail.danilashamin.furnitureordering.mvp.presentation.view.FurnitureView.FURNITURE_VIEW_TAG;
 
@@ -56,11 +58,25 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @BindView(R.id.btnColorPick)
     ImageView btnColorPick;
 
+    private ColorPickerDialog colorPickerDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        colorPickerDialog = new ColorPickerDialog(this, new ColorPickerDialogListener() {
+            @Override
+            public void onColorPicked(int color) {
+                mainPresenter.changeCurrentFurnitureColor(color);
+                mainPresenter.dismissColorPickerDialog();
+            }
+
+            @Override
+            public void onDismissButtonClicked() {
+                mainPresenter.dismissColorPickerDialog();
+            }
+        });
     }
 
     @Override
@@ -69,11 +85,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void addFurnitureOnScreen(Furniture furniture) {
         FurnitureView furnitureView = new FurnitureView(this, furniture);
         furnitureView.setOnTouchListener(new OnFurnitureTouchListener(furniture));
+        mainPresenter.setCurrentFurniture(furniture);
         fieldForFurniture.addView(furnitureView);
     }
 
@@ -104,6 +120,25 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever));
     }
 
+    @Override
+    public void showColorPickerDialog() {
+        colorPickerDialog.show();
+    }
+
+    @Override
+    public void dismissColorPickerDialog() {
+        colorPickerDialog.dismiss();
+    }
+
+    @Override
+    public void changeCurrentFurnitureColor(int color) {
+        Furniture currentFurniture = mainPresenter.getCurrentFurniture();
+        if (currentFurniture != null) {
+            currentFurniture.setColor(color);
+
+        }
+    }
+
 
     @OnClick(R.id.btnAddMattress)
     public void onBtnAddMattressClicked() {
@@ -128,7 +163,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @OnClick(R.id.btnColorPick)
     public void onBtnColorPickClicked() {
-
+        mainPresenter.showColorPickerDialog();
     }
 
 

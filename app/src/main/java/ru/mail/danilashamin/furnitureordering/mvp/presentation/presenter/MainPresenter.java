@@ -68,6 +68,21 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().deleteFurnitureView(furnitureForDelete);
     }
 
+    public void changeCurrentFurnitureColor(int color) {
+        getViewState().changeCurrentFurnitureColor(color);
+    }
+    public Furniture getCurrentFurniture() {
+        return currentFurniture;
+    }
+
+    public void showColorPickerDialog() {
+        getViewState().showColorPickerDialog();
+    }
+
+    public void dismissColorPickerDialog() {
+        getViewState().dismissColorPickerDialog();
+    }
+
     public void buy() {
 
     }

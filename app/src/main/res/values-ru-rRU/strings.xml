@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Заказ мебели</string>
     <string name="make_order">Сделать заказ</string>
+    <string name="choose_color">Выберите цвет</string>
+    <string name="cancel">Отмена</string>
 </resources>

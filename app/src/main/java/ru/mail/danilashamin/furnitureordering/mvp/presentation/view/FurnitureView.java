@@ -63,6 +63,7 @@ public class FurnitureView extends AppCompatImageView {
 
     private void setColorFilterOnBitmap(int color) {
         paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+        invalidate();
     }
 
 
