@@ -3,11 +3,13 @@ package ru.mail.danilashamin.furnitureordering.mvp.presentation.view;
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.view.WindowManager;
 
 import java.util.Locale;
 
 import ru.mail.danilashamin.furnitureordering.R;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
+import ru.mail.danilashamin.furnitureordering.mvp.model.OnFurnitureDragListener;
 
 public class FurnitureView extends AppCompatImageView {
     private Furniture furniture;
@@ -42,5 +44,12 @@ public class FurnitureView extends AppCompatImageView {
                 setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
                 break;
         }
+        setLayoutParams(furniture.getLayoutParams());
+        setOnTouchListener(new OnFurnitureDragListener(furniture));
+    }
+
+    @Override
+    public boolean performClick() {
+        return super.performClick();
     }
 }

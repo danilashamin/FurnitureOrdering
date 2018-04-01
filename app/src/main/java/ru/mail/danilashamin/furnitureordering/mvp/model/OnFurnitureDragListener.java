@@ -1,63 +1,50 @@
 package ru.mail.danilashamin.furnitureordering.mvp.model;
 
-import android.content.ClipData;
-import android.content.ClipDescription;
-import android.graphics.Color;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
-public class OnFurnitureDragListener implements View.OnDragListener {
+public class OnFurnitureDragListener implements View.OnTouchListener {
+    private int _xDelta;
+    private int _yDelta;
+    private Furniture furniture;
+
+    public OnFurnitureDragListener(Furniture furniture) {
+        this.furniture = furniture;
+    }
 
     @Override
-    public boolean onDrag(View v, DragEvent event) {
-        // Defines a variable to store the action type for the incoming event
-        // Handles each of the expected events
-        switch (event.getAction()) {
-
-            case DragEvent.ACTION_DRAG_STARTED:
-
-                if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-
-                    // As an example of what your application might do,
-                    // applies a blue color tint to the View to indicate that it can accept
-                    // data.
-                    //v.setColorFilter(Color.BLUE);
-
-                    // Invalidate the view to force a redraw in the new tint
-                    v.invalidate();
-
-                    // returns true to indicate that the View can accept the dragged data.
-                    return true;
-
-                }
-
-                // Returns false. During the current drag and drop operation, this View will
-                // not receive events again until ACTION_DRAG_ENDED is sent.
-                return false;
-
-            case DragEvent.ACTION_DRAG_ENTERED:
-                v.setX(event.getX());
-                v.setY(event.getY());
-            case DragEvent.ACTION_DRAG_LOCATION:
-
-            case DragEvent.ACTION_DRAG_EXITED:
-
-            case DragEvent.ACTION_DROP:
-
-            case DragEvent.ACTION_DRAG_ENDED:
-
-                return true;
-
-            default:
-                Log.e("DragDrop Example", "Unknown action type received by OnDragListener.");
+    public boolean onTouch(View v, MotionEvent event) {
+        final int X = (int) event.getRawX();
+        final int Y = (int) event.getRawY();
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_DOWN:
+                FrameLayout.LayoutParams lParams = (FrameLayout.LayoutParams) v.getLayoutParams();
+                _xDelta = X - lParams.leftMargin;
+                _yDelta = Y - lParams.topMargin;
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                break;
+            case MotionEvent.ACTION_POINTER_UP:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                FrameLayout.LayoutParams layoutParams = setLayoutParams(X, Y, v);
+                furniture.setLayoutParams(layoutParams);
+                v.setLayoutParams(layoutParams);
                 break;
         }
 
         return true;
     }
-}
 
+    private FrameLayout.LayoutParams setLayoutParams(int X, int Y, View v) {
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) v.getLayoutParams();
+        layoutParams.leftMargin = X - _xDelta;
+        layoutParams.topMargin = Y - _yDelta;
+        layoutParams.rightMargin = -250;
+        layoutParams.bottomMargin = -250;
+        return layoutParams;
+    }
+}

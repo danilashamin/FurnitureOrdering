@@ -1,11 +1,15 @@
 package ru.mail.danilashamin.furnitureordering.mvp.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +35,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     MainPresenter mainPresenter;
 
     @BindView(R.id.fieldForFurniture)
-    RelativeLayout fieldForFurniture;
+    FrameLayout fieldForFurniture;
     @BindView(R.id.tvMattressCounter)
     TextView tvMattressCounter;
     @BindView(R.id.btnAddMattress)
@@ -68,15 +72,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void addFurnitureOnScreen(Furniture furniture) {
         FurnitureView furnitureView = new FurnitureView(this, furniture);
-        WindowManager.LayoutParams imageViewLayoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        imageViewLayoutParams.width = 100;
-        imageViewLayoutParams.height = 100;
-        furnitureView.setLayoutParams(imageViewLayoutParams);
-        furnitureView.setOnLongClickListener(new OnFurnitureTouchListener());
-        furnitureView.setOnDragListener(new OnFurnitureDragListener());
         fieldForFurniture.addView(furnitureView);
     }
 
