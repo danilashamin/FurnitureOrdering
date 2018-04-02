@@ -80,4 +80,14 @@ public class FurnitureView extends AppCompatImageView {
     public Furniture getFurniture() {
         return furniture;
     }
+
+    public void setCurrent() {
+        setBackground(getResources().getDrawable(R.drawable.current_furniture_border));
+        invalidate();
+    }
+
+    public void unsetCurrent() {
+        setBackground(null);
+        invalidate();
+    }
 }
