@@ -206,6 +206,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         }
     }
 
+    @Override
+    public void setPrice(double price) {
+        tvPrice.setText(String.format("$%s", String.valueOf(price)));
+    }
+
     @OnClick(R.id.btnAddMattress)
     public void onBtnAddMattressClicked() {
         mainPresenter.addFurniture(FurnitureType.MATTRESS);

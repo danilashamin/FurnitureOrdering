@@ -52,4 +52,6 @@ public interface MainView extends MvpView {
     @StateStrategyType(AddToEndStrategy.class)
     void unsetCurrentFurniture(Furniture currentFurniture);
 
+    @StateStrategyType(AddToEndSingleStrategy.class)
+    void setPrice(double price);
 }

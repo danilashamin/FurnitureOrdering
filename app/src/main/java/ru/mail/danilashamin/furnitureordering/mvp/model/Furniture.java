@@ -6,6 +6,8 @@ import android.widget.FrameLayout;
 public class Furniture {
     private FurnitureType type;
     private int ID;
+    private Double price;
+
     private FrameLayout.LayoutParams layoutParams;
 
     public Furniture(FurnitureType type, int ID) {
@@ -14,6 +16,21 @@ public class Furniture {
         this.layoutParams = new FrameLayout.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         layoutParams.width = 100;
         layoutParams.height = 100;
+        setPrice();
+    }
+
+    private void setPrice() {
+        switch (type) {
+            case PUFF:
+                price = (double) 10;
+                break;
+            case CUSHION:
+                price = (double) 10;
+                break;
+            case MATTRESS:
+                price = (double) 10;
+                break;
+        }
     }
 
     public FurnitureType getType() {
@@ -28,8 +45,13 @@ public class Furniture {
         this.layoutParams = layoutParams;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
     public FrameLayout.LayoutParams getLayoutParams() {
         return layoutParams;
     }
+
 
 }

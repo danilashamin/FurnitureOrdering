@@ -30,7 +30,7 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ivTrashCan"
@@ -40,6 +40,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:foreground="?attr/selectableItemBackground"
         android:src="@drawable/ic_delete_forever"
         app:layout_constraintBottom_toBottomOf="@+id/fieldForFurniture"
         app:layout_constraintStart_toStartOf="@+id/fieldForFurniture"
@@ -55,6 +56,7 @@
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:src="@drawable/ic_camera_alt"
         app:layout_constraintBottom_toBottomOf="@+id/fieldForFurniture"
         app:layout_constraintEnd_toEndOf="@+id/fieldForFurniture"
@@ -69,6 +71,7 @@
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:src="@drawable/ic_format_color_fill"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +85,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="10"
+        android:text="$0.0"
         android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +120,7 @@
             <ImageView
                 android:id="@+id/btnAddMattress"
                 android:layout_width="wrap_content"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
@@ -146,6 +150,7 @@
             <ImageView
                 android:id="@+id/btnAddPuff"
                 android:layout_width="wrap_content"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
@@ -173,6 +178,7 @@
                 android:id="@+id/btnAddCushion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@mipmap/ic_launcher" />

@@ -13,6 +13,7 @@ import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
 public class MainPresenter extends MvpPresenter<MainView> {
 
     private Integer mattressCounter = 0, puffCounter = 0, cushionCounter = 0;
+    private Double totalValue = (double) 0;
 
     private int furnitureCounter;
     private Furniture currentFurniture;
@@ -24,6 +25,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     public void addFurniture(FurnitureType type) {
         Furniture furniture = new Furniture(type, ++furnitureCounter);
+        totalValue += furniture.getPrice();
         switch (type) {
             case MATTRESS:
                 getViewState().setMattressCounter(++mattressCounter);
@@ -35,6 +37,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 getViewState().setPuffCounter(++puffCounter);
                 break;
         }
+        getViewState().setPrice(totalValue);
         getViewState().addFurnitureOnScreen(furniture);
     }
 
@@ -64,6 +67,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
     }
 
     public void deleteFurniture(Furniture furnitureForDelete) {
+        totalValue -= furnitureForDelete.getPrice();
         switch (furnitureForDelete.getType()) {
             case MATTRESS:
                 getViewState().setMattressCounter(--mattressCounter);
@@ -75,6 +79,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 getViewState().setPuffCounter(--puffCounter);
                 break;
         }
+        getViewState().setPrice(totalValue);
         getViewState().deleteFurnitureView(furnitureForDelete);
     }
 
@@ -87,9 +92,11 @@ public class MainPresenter extends MvpPresenter<MainView> {
         mattressCounter = 0;
         cushionCounter = 0;
         puffCounter = 0;
+        totalValue = (double) 0;
         getViewState().setMattressCounter(mattressCounter);
         getViewState().setCushionCounter(cushionCounter);
         getViewState().setPuffCounter(puffCounter);
+        getViewState().setPrice(totalValue);
         getViewState().deleteAllFurniture();
     }
 
