@@ -51,7 +51,16 @@ public class MainPresenter extends MvpPresenter<MainView> {
     }
 
     public void setCurrentFurniture(Furniture currentFurniture) {
+        unsetCurrentFurniture();
         this.currentFurniture = currentFurniture;
+        getViewState().setCurrentFurniture(currentFurniture);
+    }
+
+    public void unsetCurrentFurniture() {
+        if (currentFurniture == null) {
+            return;
+        }
+        getViewState().unsetCurrentFurniture(currentFurniture);
     }
 
     public void deleteFurniture(Furniture furnitureForDelete) {
@@ -70,8 +79,9 @@ public class MainPresenter extends MvpPresenter<MainView> {
     }
 
     public void changeCurrentFurnitureColor(int color) {
-        getViewState().changeCurrentFurnitureColor(color);
+        getViewState().changeCurrentFurnitureColor(color, currentFurniture);
     }
+
 
     public void deleteAllFurniture() {
         mattressCounter = 0;
@@ -81,10 +91,6 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().setCushionCounter(cushionCounter);
         getViewState().setPuffCounter(puffCounter);
         getViewState().deleteAllFurniture();
-    }
-
-    public Furniture getCurrentFurniture() {
-        return currentFurniture;
     }
 
     public void showColorPickerDialog() {

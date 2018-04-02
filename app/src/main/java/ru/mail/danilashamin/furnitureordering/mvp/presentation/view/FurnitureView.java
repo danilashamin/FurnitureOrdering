@@ -57,11 +57,9 @@ public class FurnitureView extends AppCompatImageView {
         bitmap = Bitmap.createScaledBitmap(bitmap, furniture.getLayoutParams().width, furniture.getLayoutParams().height, true);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         setColorFilterOnBitmap(getResources().getColor(R.color.first_color));
-
-        furniture.setOnFurnitureColorChangeListener(this::setColorFilterOnBitmap);
     }
 
-    private void setColorFilterOnBitmap(int color) {
+    public void setColorFilterOnBitmap(int color) {
         paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
         invalidate();
     }

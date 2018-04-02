@@ -1,5 +1,6 @@
 package ru.mail.danilashamin.furnitureordering.mvp.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -67,6 +68,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     private ColorPickerDialog colorPickerDialog;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +96,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                         });
             }
         });
+
+        fieldForFurniture.setOnTouchListener((v, event) -> {
+            mainPresenter.unsetCurrentFurniture();
+            return true;
+        });
     }
 
 
@@ -113,8 +120,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     public void addFurnitureOnScreen(Furniture furniture) {
         FurnitureView furnitureView = new FurnitureView(this, furniture);
         furnitureView.setOnTouchListener(new OnFurnitureTouchListener(furniture));
-        mainPresenter.setCurrentFurniture(furniture);
         fieldForFurniture.addView(furnitureView);
+        mainPresenter.setCurrentFurniture(furniture);
     }
 
     @Override
@@ -140,8 +147,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void deleteFurnitureView(Furniture furnitureForDelete) {
-        fieldForFurniture.removeView(fieldForFurniture.findViewWithTag(String.format(Locale.getDefault(), "%s%d", FURNITURE_VIEW_TAG, furnitureForDelete.getID())));
+        fieldForFurniture.removeView(findFurnitureView(furnitureForDelete));
         ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever));
+    }
+
+    private FurnitureView findFurnitureView(Furniture furniture) {
+        return fieldForFurniture.findViewWithTag(String.format(Locale.getDefault(), "%s%d", FURNITURE_VIEW_TAG, furniture.getID()));
     }
 
     @Override
@@ -155,12 +166,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
     @Override
-    public void changeCurrentFurnitureColor(int color) {
-        Furniture currentFurniture = mainPresenter.getCurrentFurniture();
-        if (currentFurniture != null) {
-            currentFurniture.setColor(color);
-
-        }
+    public void changeCurrentFurnitureColor(int color, Furniture currentFurniture) {
+        findFurnitureView(currentFurniture).setColorFilterOnBitmap(color);
     }
 
     @Override
@@ -183,6 +190,21 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         fieldForFurniture.removeAllViews();
     }
 
+    @Override
+    public void setCurrentFurniture(Furniture currentFurniture) {
+        FurnitureView view = findFurnitureView(currentFurniture);
+        if (view != null) {
+            view.setCurrent();
+        }
+    }
+
+    @Override
+    public void unsetCurrentFurniture(Furniture currentFurniture) {
+        FurnitureView view = findFurnitureView(currentFurniture);
+        if (view != null) {
+            view.unsetCurrent();
+        }
+    }
 
     @OnClick(R.id.btnAddMattress)
     public void onBtnAddMattressClicked() {

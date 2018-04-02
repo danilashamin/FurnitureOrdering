@@ -35,7 +35,7 @@ public interface MainView extends MvpView {
     void dismissColorPickerDialog();
 
     @StateStrategyType(AddToEndStrategy.class)
-    void changeCurrentFurnitureColor(int color);
+    void changeCurrentFurnitureColor(int color, Furniture currentFurniture);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
     void startCamera();
@@ -43,5 +43,13 @@ public interface MainView extends MvpView {
     @StateStrategyType(AddToEndSingleStrategy.class)
     void stopCamera();
 
+    @StateStrategyType(AddToEndSingleStrategy.class)
     void deleteAllFurniture();
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void setCurrentFurniture(Furniture currentFurniture);
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void unsetCurrentFurniture(Furniture currentFurniture);
+
 }
