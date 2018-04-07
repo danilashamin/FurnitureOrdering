@@ -41,17 +41,17 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @BindView(R.id.photoView)
     CameraView photoView;
-    @BindView(R.id.tvMattressCounter)
+    @BindView(R.id.tvSingleUnitModuleCounter)
     TextView tvMattressCounter;
-    @BindView(R.id.btnAddMattress)
+    @BindView(R.id.btnAddSingleModuleUnit)
     ImageView btnAddMattress;
-    @BindView(R.id.tvPuffCounter)
+    @BindView(R.id.tvFourModuleUnitCounter)
     TextView tvPuffCounter;
-    @BindView(R.id.btnAddPuff)
+    @BindView(R.id.btnAddFourModuleUnit)
     ImageView btnAddPuff;
-    @BindView(R.id.tvCushionCounter)
+    @BindView(R.id.tvEightModuleUnitCounter)
     TextView tvCushionCounter;
-    @BindView(R.id.btnAddCushion)
+    @BindView(R.id.btnAddEightModuleUnit)
     ImageView btnAddCushion;
     @BindView(R.id.btnBuy)
     Button btnBuy;
@@ -74,7 +74,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        colorPickerDialog = new ColorPickerDialog(this, new ColorPickerDialogListener() {
+        colorPickerDialog = new ColorPickerDialog(new ColorPickerDialogListener() {
             @Override
             public void onColorPicked(int color) {
                 mainPresenter.changeCurrentFurnitureColor(color);
@@ -211,19 +211,19 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         tvPrice.setText(String.format("$%s", String.valueOf(price)));
     }
 
-    @OnClick(R.id.btnAddMattress)
+    @OnClick(R.id.btnAddSingleModuleUnit)
     public void onBtnAddMattressClicked() {
-        mainPresenter.addFurniture(FurnitureType.MATTRESS);
+        mainPresenter.addFurniture(FurnitureType.SINGLE_UNIT_MODULE);
     }
 
-    @OnClick(R.id.btnAddPuff)
+    @OnClick(R.id.btnAddFourModuleUnit)
     public void onBtnAddPuffClicked() {
-        mainPresenter.addFurniture(FurnitureType.PUFF);
+        mainPresenter.addFurniture(FurnitureType.FOUR_UNIT_MODULE);
     }
 
-    @OnClick(R.id.btnAddCushion)
+    @OnClick(R.id.btnAddEightModuleUnit)
     public void onBtnAddCushionClicked() {
-        mainPresenter.addFurniture(FurnitureType.CUSHION);
+        mainPresenter.addFurniture(FurnitureType.PILLOW);
     }
 
     @OnClick(R.id.btnBuy)

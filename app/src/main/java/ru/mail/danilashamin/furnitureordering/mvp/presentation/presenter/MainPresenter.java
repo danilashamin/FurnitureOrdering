@@ -27,13 +27,13 @@ public class MainPresenter extends MvpPresenter<MainView> {
         Furniture furniture = new Furniture(type, ++furnitureCounter);
         totalValue += furniture.getPrice();
         switch (type) {
-            case MATTRESS:
+            case SINGLE_UNIT_MODULE:
                 getViewState().setMattressCounter(++mattressCounter);
                 break;
-            case CUSHION:
+            case PILLOW:
                 getViewState().setCushionCounter(++cushionCounter);
                 break;
-            case PUFF:
+            case FOUR_UNIT_MODULE:
                 getViewState().setPuffCounter(++puffCounter);
                 break;
         }
@@ -69,14 +69,17 @@ public class MainPresenter extends MvpPresenter<MainView> {
     public void deleteFurniture(Furniture furnitureForDelete) {
         totalValue -= furnitureForDelete.getPrice();
         switch (furnitureForDelete.getType()) {
-            case MATTRESS:
+            case SINGLE_UNIT_MODULE:
                 getViewState().setMattressCounter(--mattressCounter);
                 break;
-            case CUSHION:
-                getViewState().setCushionCounter(--cushionCounter);
-                break;
-            case PUFF:
+            case FOUR_UNIT_MODULE:
                 getViewState().setPuffCounter(--puffCounter);
+                break;
+            case EIGHT_UNIT_MODULE:
+
+                break;
+            case PILLOW:
+                getViewState().setCushionCounter(--cushionCounter);
                 break;
         }
         getViewState().setPrice(totalValue);

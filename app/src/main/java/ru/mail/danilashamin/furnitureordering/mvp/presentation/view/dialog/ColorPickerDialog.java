@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ru.mail.danilashamin.furnitureordering.R;
+import ru.mail.danilashamin.furnitureordering.mvp.App;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.presenter.MainPresenter;
 
 public class ColorPickerDialog {
@@ -48,13 +49,13 @@ public class ColorPickerDialog {
     private Resources resources;
     private ColorPickerDialogListener listener;
 
-    public ColorPickerDialog(Context context, ColorPickerDialogListener listener) {
-        dialog = new MaterialDialog.Builder(context)
+    public ColorPickerDialog(ColorPickerDialogListener listener) {
+        dialog = new MaterialDialog.Builder(App.getContext())
                 .customView(R.layout.dialog_color_pick, true)
                 .canceledOnTouchOutside(false)
                 .build();
         this.listener = listener;
-        this.resources = context.getResources();
+        this.resources = App.getContext().getResources();
         ButterKnife.bind(this, dialog);
     }
 
