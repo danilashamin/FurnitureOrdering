@@ -90,7 +90,8 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().deleteFurnitureView(furnitureForDelete);
     }
 
-    public void changeCurrentFurnitureColor(int color) {
+    public void changeCurrentFurnitureColor(int color, String article) {
+        currentFurniture.setArticle(article);
         getViewState().changeCurrentFurnitureColor(color, currentFurniture);
     }
 
@@ -117,7 +118,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().dismissColorPickerDialog();
     }
 
-    public void selectFito(){
+    public void selectFito() {
 
     }
 

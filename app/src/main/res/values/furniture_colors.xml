@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="first_color">#c8dbe1</color>
-    <color name="second_color">#b6c1c0</color>
-    <color name="third_color">#a2a39d</color>
-    <color name="fourth_color">#ce8036</color>
-    <color name="fifth_color">#bf6248</color>
-    <color name="sixth_color">#b23342</color>
-    <color name="seventh_color">#8a323e</color>
-    <color name="eighth_color">#974792</color>
-    <color name="nineth_color">#833565</color>
-    <color name="tenth_color">#84ac6c</color>
-    <color name="eleventh_color">#5d7d40</color>
-    <color name="twelveth_color">#11358c</color>
-
+    <color name="first_color">#867d73</color>
+    <color name="second_color">#706352</color>
+    <color name="third_color">#7e6146</color>
+    <color name="fourth_color">#5d5a53</color>
+    <color name="fifth_color">#ac6a13</color>
+    <color name="sixth_color">#387c84</color>
+    <color name="seventh_color">#772b43</color>
+    <color name="eighth_color">#89715c</color>
+    <color name="nineth_color">#574e3f</color>
+    <color name="tenth_color">#292524</color>
+    <color name="eleventh_color">#322724</color>
+    <color name="twelveth_color">#402d26</color>
+    <color name="thirteenth_color">#a29279</color>
+    <color name="fourteenth_color">#3d213a</color>
+    <color name="fifteenth_color">#110d0d</color>
+    <color name="sixteenth_color">#303f51</color>
 </resources>

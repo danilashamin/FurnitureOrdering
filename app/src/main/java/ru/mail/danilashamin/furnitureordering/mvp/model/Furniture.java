@@ -7,6 +7,7 @@ public class Furniture {
     private FurnitureType type;
     private int ID;
     private Double price;
+    private String article;
 
     private FrameLayout.LayoutParams layoutParams;
 
@@ -58,4 +59,11 @@ public class Furniture {
     }
 
 
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
+    }
 }

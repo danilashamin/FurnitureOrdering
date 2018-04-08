@@ -145,6 +145,50 @@
             android:src="@color/twelveth_color" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btnThirteenthColor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@color/thirteenth_color" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btnFourteenthColor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@color/fourteenth_color" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btnFifteenthColor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@color/fifteenth_color" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btnSixteenthColor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@color/sixteenth_color" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
