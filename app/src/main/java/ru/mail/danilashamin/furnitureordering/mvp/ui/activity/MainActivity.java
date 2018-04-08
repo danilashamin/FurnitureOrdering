@@ -262,6 +262,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         }
     }
 
+    @OnClick(R.id.btnSelectFito)
+    public void onbtnSelectFitoClicked() {
+        mainPresenter.selectFito();
+    }
+
 
     public class OnFurnitureTouchListener implements View.OnTouchListener {
         private int _xDelta;

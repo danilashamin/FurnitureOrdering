@@ -117,6 +117,10 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().dismissColorPickerDialog();
     }
 
+    public void selectFito(){
+
+    }
+
     public void buy() {
 
     }
