@@ -5,6 +5,9 @@ import android.graphics.drawable.Drawable;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
@@ -14,12 +17,13 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     private Integer singleUnitModuleCounter = 0, eightUnitModuleCounter = 0, fourUnitModuleCounter = 0, pillowCounter = 0;
     private Double totalValue = (double) 0;
-
+    private List<Furniture> furnitureList;
     private int furnitureCounter;
     private Furniture currentFurniture;
 
     public MainPresenter() {
         furnitureCounter = 0;
+        furnitureList = new ArrayList<>();
     }
 
 
@@ -43,6 +47,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
         }
         getViewState().setPrice(totalValue);
         getViewState().addFurnitureOnScreen(furniture);
+        furnitureList.add(furniture);
     }
 
     public void setBackgroundPhoto(Drawable backgroundPhoto) {
@@ -88,6 +93,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
         }
         getViewState().setPrice(totalValue);
         getViewState().deleteFurnitureView(furnitureForDelete);
+        furnitureList.remove(furnitureForDelete);
     }
 
     public void changeCurrentFurnitureColor(int color, String article) {

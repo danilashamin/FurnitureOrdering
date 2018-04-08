@@ -3,11 +3,14 @@ package ru.mail.danilashamin.furnitureordering.mvp.model;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import java.util.Locale;
+
 public class Furniture {
     private FurnitureType type;
     private int ID;
     private Double price;
     private String article;
+    private int fitoNumber;
 
     private FrameLayout.LayoutParams layoutParams;
 
@@ -59,11 +62,40 @@ public class Furniture {
     }
 
 
-    public String getArticle() {
-        return article;
-    }
-
     public void setArticle(String article) {
         this.article = article;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format(Locale.getDefault(), "№ %d\n", ID));
+        String type = "";
+        switch (this.type) {
+            case SINGLE_UNIT_MODULE:
+                type = "Одноблочный модуль";
+                break;
+            case FOUR_UNIT_MODULE:
+                type = "Четырёхблочный модуль";
+                break;
+            case EIGHT_UNIT_MODULE:
+                type = "Восьмиблочный модуль";
+                break;
+            case PILLOW:
+                type = "Подушка";
+                break;
+
+        }
+        builder.append("Вид товара: ").append(type).append("\n");
+        builder.append("Артикул цвета: ").append(article).append("\n");
+        if (fitoNumber != 0) {
+            builder.append("Номер фитосостава: ").append(fitoNumber).append("\n");
+        }
+        builder.append("Цена: ").append(price).append("\n");
+        return builder.toString();
+    }
+
+    public void setFitoNumber(int fitoNumber) {
+        this.fitoNumber = fitoNumber;
     }
 }
