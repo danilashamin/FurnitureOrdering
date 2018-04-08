@@ -1,5 +1,6 @@
 package ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +12,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ru.mail.danilashamin.furnitureordering.R;
-import ru.mail.danilashamin.furnitureordering.mvp.App;
 
 public class ColorPickerDialog {
 
@@ -55,13 +55,13 @@ public class ColorPickerDialog {
     private Resources resources;
     private ColorPickerDialogListener listener;
 
-    public ColorPickerDialog(ColorPickerDialogListener listener) {
-        dialog = new MaterialDialog.Builder(App.getContext())
+    public ColorPickerDialog(Context context, ColorPickerDialogListener listener) {
+        dialog = new MaterialDialog.Builder(context)
                 .customView(R.layout.dialog_color_pick, true)
                 .canceledOnTouchOutside(false)
                 .build();
         this.listener = listener;
-        this.resources = App.getContext().getResources();
+        this.resources = context.getResources();
         ButterKnife.bind(this, dialog);
     }
 

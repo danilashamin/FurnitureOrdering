@@ -78,7 +78,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        colorPickerDialog = new ColorPickerDialog(new ColorPickerDialogListener() {
+        colorPickerDialog = new ColorPickerDialog(this, new ColorPickerDialogListener() {
             @Override
             public void onColorPicked(int color, String article) {
                 mainPresenter.changeCurrentFurnitureColor(color, article);

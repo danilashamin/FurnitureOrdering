@@ -91,7 +91,9 @@ public class MainPresenter extends MvpPresenter<MainView> {
     }
 
     public void changeCurrentFurnitureColor(int color, String article) {
-        currentFurniture.setArticle(article);
+        if (currentFurniture != null) {
+            currentFurniture.setArticle(article);
+        }
         getViewState().changeCurrentFurnitureColor(color, currentFurniture);
     }
 
