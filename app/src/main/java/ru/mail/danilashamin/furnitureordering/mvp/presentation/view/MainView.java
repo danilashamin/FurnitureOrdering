@@ -14,13 +14,16 @@ public interface MainView extends MvpView {
     void addFurnitureOnScreen(Furniture furniture);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
-    void setMattressCounter(Integer mattressCounter);
+    void setSingleUnitModuleCounter(Integer singleUnitModuleCounter);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
-    void setPuffCounter(Integer puffCounter);
+    void setFourUnitModuleCounter(Integer fourUnitModuleCounter);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
-    void setCushionCounter(Integer cushionCounter);
+    void setEightUnitModuleCounter(Integer eightUnitModuleCounter);
+    
+    @StateStrategyType(AddToEndSingleStrategy.class)
+    void setPillowCounter(Integer pillowCounter);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
     void setBackgroundPhoto(Drawable photo);

@@ -21,15 +21,19 @@ public class Furniture {
 
     private void setPrice() {
         switch (type) {
+            case SINGLE_UNIT_MODULE:
+                price = (double) 3000;
+                break;
             case FOUR_UNIT_MODULE:
-                price = (double) 10;
+                price = (double) 90000;
+                break;
+            case EIGHT_UNIT_MODULE:
+                price = (double) 150000;
                 break;
             case PILLOW:
-                price = (double) 10;
+                price = (double) 600;
                 break;
-            case SINGLE_UNIT_MODULE:
-                price = (double) 10;
-                break;
+
         }
     }
 

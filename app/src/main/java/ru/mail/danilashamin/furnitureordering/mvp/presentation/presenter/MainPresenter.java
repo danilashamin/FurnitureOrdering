@@ -12,7 +12,7 @@ import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
 @InjectViewState
 public class MainPresenter extends MvpPresenter<MainView> {
 
-    private Integer mattressCounter = 0, puffCounter = 0, cushionCounter = 0;
+    private Integer singleUnitModuleCounter = 0, eightUnitModuleCounter = 0, fourUnitModuleCounter = 0, pillowCounter = 0;
     private Double totalValue = (double) 0;
 
     private int furnitureCounter;
@@ -28,14 +28,18 @@ public class MainPresenter extends MvpPresenter<MainView> {
         totalValue += furniture.getPrice();
         switch (type) {
             case SINGLE_UNIT_MODULE:
-                getViewState().setMattressCounter(++mattressCounter);
-                break;
-            case PILLOW:
-                getViewState().setCushionCounter(++cushionCounter);
+                getViewState().setSingleUnitModuleCounter(++singleUnitModuleCounter);
                 break;
             case FOUR_UNIT_MODULE:
-                getViewState().setPuffCounter(++puffCounter);
+                getViewState().setFourUnitModuleCounter(++fourUnitModuleCounter);
                 break;
+            case EIGHT_UNIT_MODULE:
+                getViewState().setEightUnitModuleCounter(++eightUnitModuleCounter);
+                break;
+            case PILLOW:
+                getViewState().setPillowCounter(++pillowCounter);
+                break;
+
         }
         getViewState().setPrice(totalValue);
         getViewState().addFurnitureOnScreen(furniture);
@@ -70,16 +74,16 @@ public class MainPresenter extends MvpPresenter<MainView> {
         totalValue -= furnitureForDelete.getPrice();
         switch (furnitureForDelete.getType()) {
             case SINGLE_UNIT_MODULE:
-                getViewState().setMattressCounter(--mattressCounter);
+                getViewState().setSingleUnitModuleCounter(--singleUnitModuleCounter);
                 break;
             case FOUR_UNIT_MODULE:
-                getViewState().setPuffCounter(--puffCounter);
+                getViewState().setFourUnitModuleCounter(--fourUnitModuleCounter);
                 break;
             case EIGHT_UNIT_MODULE:
-
+                getViewState().setEightUnitModuleCounter(--eightUnitModuleCounter);
                 break;
             case PILLOW:
-                getViewState().setCushionCounter(--cushionCounter);
+                getViewState().setPillowCounter(--pillowCounter);
                 break;
         }
         getViewState().setPrice(totalValue);
@@ -92,13 +96,15 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
 
     public void deleteAllFurniture() {
-        mattressCounter = 0;
-        cushionCounter = 0;
-        puffCounter = 0;
+        singleUnitModuleCounter = 0;
+        pillowCounter = 0;
+        fourUnitModuleCounter = 0;
+        eightUnitModuleCounter = 0;
         totalValue = (double) 0;
-        getViewState().setMattressCounter(mattressCounter);
-        getViewState().setCushionCounter(cushionCounter);
-        getViewState().setPuffCounter(puffCounter);
+        getViewState().setSingleUnitModuleCounter(singleUnitModuleCounter);
+        getViewState().setPillowCounter(pillowCounter);
+        getViewState().setFourUnitModuleCounter(fourUnitModuleCounter);
+        getViewState().setEightUnitModuleCounter(eightUnitModuleCounter);
         getViewState().setPrice(totalValue);
         getViewState().deleteAllFurniture();
     }

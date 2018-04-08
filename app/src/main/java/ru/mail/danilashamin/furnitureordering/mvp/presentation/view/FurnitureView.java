@@ -41,15 +41,18 @@ public class FurnitureView extends AppCompatImageView {
 
     private void init() {
         switch (furniture.getType()) {
+            case SINGLE_UNIT_MODULE:
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                break;
             case FOUR_UNIT_MODULE:
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                break;
+            case EIGHT_UNIT_MODULE:
                 bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 break;
             case PILLOW:
                 bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 bringToFront();
-                break;
-            case SINGLE_UNIT_MODULE:
-                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 break;
         }
         setLayoutParams(furniture.getLayoutParams());

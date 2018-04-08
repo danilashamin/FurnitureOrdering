@@ -42,17 +42,17 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @BindView(R.id.photoView)
     CameraView photoView;
     @BindView(R.id.tvSingleUnitModuleCounter)
-    TextView tvMattressCounter;
+    TextView tvSingleUnitModuleCounter;
     @BindView(R.id.btnAddSingleModuleUnit)
-    ImageView btnAddMattress;
+    ImageView btnAddSingleModuleUnit;
     @BindView(R.id.tvFourModuleUnitCounter)
-    TextView tvPuffCounter;
+    TextView tvFourModuleUnitCounter;
     @BindView(R.id.btnAddFourModuleUnit)
-    ImageView btnAddPuff;
+    ImageView btnAddFourModuleUnit;
     @BindView(R.id.tvEightModuleUnitCounter)
-    TextView tvCushionCounter;
+    TextView tvEightModuleUnitCounter;
     @BindView(R.id.btnAddEightModuleUnit)
-    ImageView btnAddCushion;
+    ImageView btnAddEightModuleUnit;
     @BindView(R.id.btnBuy)
     Button btnBuy;
     @BindView(R.id.ivTrashCan)
@@ -65,6 +65,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     ImageView btnCamera;
     @BindView(R.id.fieldForFurniture)
     FrameLayout fieldForFurniture;
+    @BindView(R.id.tvPillowCounter)
+    TextView tvPillowCounter;
+    @BindView(R.id.btnAddPillow)
+    ImageView btnAddPillow;
 
     private ColorPickerDialog colorPickerDialog;
 
@@ -125,18 +129,23 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
     @Override
-    public void setMattressCounter(Integer mattressCounter) {
-        tvMattressCounter.setText(String.valueOf(mattressCounter));
+    public void setSingleUnitModuleCounter(Integer singleUnitModuleCounter) {
+        tvSingleUnitModuleCounter.setText(String.valueOf(singleUnitModuleCounter));
     }
 
     @Override
-    public void setPuffCounter(Integer puffCounter) {
-        tvPuffCounter.setText(String.valueOf(puffCounter));
+    public void setFourUnitModuleCounter(Integer fourUnitModuleCounter) {
+        tvFourModuleUnitCounter.setText(String.valueOf(fourUnitModuleCounter));
     }
 
     @Override
-    public void setCushionCounter(Integer cushionCounter) {
-        tvCushionCounter.setText(String.valueOf(cushionCounter));
+    public void setEightUnitModuleCounter(Integer eightUnitModuleCounter) {
+        tvEightModuleUnitCounter.setText(String.valueOf(eightUnitModuleCounter));
+    }
+
+    @Override
+    public void setPillowCounter(Integer pillowCounter) {
+        tvPillowCounter.setText(String.valueOf(pillowCounter));
     }
 
     @Override
@@ -187,7 +196,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void deleteAllFurniture() {
+        ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever_activated));
         fieldForFurniture.removeAllViews();
+        ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever));
     }
 
     @Override
@@ -208,23 +219,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void setPrice(double price) {
-        tvPrice.setText(String.format("$%s", String.valueOf(price)));
+        tvPrice.setText(String.format("\u20BD%s", String.valueOf(price)));
     }
 
-    @OnClick(R.id.btnAddSingleModuleUnit)
-    public void onBtnAddMattressClicked() {
-        mainPresenter.addFurniture(FurnitureType.SINGLE_UNIT_MODULE);
-    }
-
-    @OnClick(R.id.btnAddFourModuleUnit)
-    public void onBtnAddPuffClicked() {
-        mainPresenter.addFurniture(FurnitureType.FOUR_UNIT_MODULE);
-    }
-
-    @OnClick(R.id.btnAddEightModuleUnit)
-    public void onBtnAddCushionClicked() {
-        mainPresenter.addFurniture(FurnitureType.PILLOW);
-    }
 
     @OnClick(R.id.btnBuy)
     public void onBtnBuyClicked() {
@@ -245,6 +242,24 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @OnClick(R.id.ivTrashCan)
     public void onTrashCanClicked() {
         mainPresenter.deleteAllFurniture();
+    }
+
+    @OnClick({R.id.btnAddSingleModuleUnit, R.id.btnAddFourModuleUnit, R.id.btnAddEightModuleUnit, R.id.btnAddPillow})
+    public void onAddButtonClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btnAddSingleModuleUnit:
+                mainPresenter.addFurniture(FurnitureType.SINGLE_UNIT_MODULE);
+                break;
+            case R.id.btnAddFourModuleUnit:
+                mainPresenter.addFurniture(FurnitureType.FOUR_UNIT_MODULE);
+                break;
+            case R.id.btnAddEightModuleUnit:
+                mainPresenter.addFurniture(FurnitureType.EIGHT_UNIT_MODULE);
+                break;
+            case R.id.btnAddPillow:
+                mainPresenter.addFurniture(FurnitureType.PILLOW);
+                break;
+        }
     }
 
 

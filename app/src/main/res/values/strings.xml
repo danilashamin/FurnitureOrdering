@@ -3,4 +3,5 @@
     <string name="make_order">Make order</string>
     <string name="choose_color">Choose color</string>
     <string name="cancel">Cancel</string>
+    <string name="select_fito">Select a phytocoel</string>
 </resources>
