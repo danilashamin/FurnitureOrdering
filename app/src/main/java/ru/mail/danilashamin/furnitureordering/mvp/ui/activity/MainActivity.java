@@ -11,19 +11,23 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.otaliastudios.cameraview.CameraListener;
 import com.otaliastudios.cameraview.CameraUtils;
 import com.otaliastudios.cameraview.CameraView;
 
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.mail.danilashamin.furnitureordering.R;
+import ru.mail.danilashamin.furnitureordering.mvp.App;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.presenter.MainPresenter;
@@ -78,6 +82,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         colorPickerDialog = new ColorPickerDialog(this, new ColorPickerDialogListener() {
             @Override
             public void onColorPicked(int color, String article) {
@@ -196,9 +201,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void deleteAllFurniture() {
-        ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever_activated));
         fieldForFurniture.removeAllViews();
-        ivTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_forever));
     }
 
     @Override
@@ -220,6 +223,29 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @Override
     public void setPrice(double price) {
         tvPrice.setText(String.format("\u20BD%s", String.valueOf(price)));
+    }
+
+
+    @Override
+    public void buy(List<Furniture> furnitureList) {
+        if (furnitureList.isEmpty()) {
+            Toast.makeText(this, getString(R.string.order_empty), Toast.LENGTH_SHORT).show();
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Содержание заказа: \n");
+        for (Furniture furniture : furnitureList) {
+            stringBuilder.append(furniture.toString());
+        }
+        BackgroundMail.newBuilder(this)
+                .withUsername("suncoinfurnitureneworder@gmail.com")
+                .withPassword("akofcNl7")
+                .withMailto("danilashamin@mail.ru")
+                .withType(BackgroundMail.TYPE_PLAIN)
+                .withSubject("Новый заказ")
+                .withBody(stringBuilder.toString())
+                .withOnSuccessCallback(() -> Toast.makeText(this, getString(R.string.email_succcess), Toast.LENGTH_LONG).show())
+                .withOnFailCallback(() -> Toast.makeText(this, getString(R.string.email_fail), Toast.LENGTH_LONG).show())
+                .send();
     }
 
 
@@ -314,8 +340,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
             FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) v.getLayoutParams();
             layoutParams.leftMargin = X - _xDelta;
             layoutParams.topMargin = Y - _yDelta;
-            layoutParams.rightMargin = -250;
-            layoutParams.bottomMargin = -250;
             return layoutParams;
         }
     }

@@ -5,7 +5,10 @@ import android.graphics.drawable.Drawable;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy;
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
+
+import java.util.List;
 
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 
@@ -21,7 +24,7 @@ public interface MainView extends MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy.class)
     void setEightUnitModuleCounter(Integer eightUnitModuleCounter);
-    
+
     @StateStrategyType(AddToEndSingleStrategy.class)
     void setPillowCounter(Integer pillowCounter);
 
@@ -57,4 +60,7 @@ public interface MainView extends MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy.class)
     void setPrice(double price);
+
+    @StateStrategyType(SkipStrategy.class)
+    void buy(List<Furniture> furnitureList);
 }

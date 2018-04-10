@@ -4,4 +4,7 @@
     <string name="make_order">Сделать заказ</string>
     <string name="choose_color">Выберите цвет</string>
     <string name="cancel">Отмена</string>
+    <string name="email_succcess">Заказ успешно оформлен!</string>
+    <string name="email_fail">К сожалению, не удалось оформить заказ.</string>
+    <string name="order_empty">Козина пуста</string>
 </resources>

@@ -73,7 +73,7 @@ public class ColorPickerDialog {
         dialog.dismiss();
     }
 
-    @OnClick({R.id.btnFirstColor, R.id.btnSecondColor, R.id.btnThirdColor, R.id.btnFourthColor, R.id.btnFifthColor, R.id.btnSixthColor, R.id.btnSeventhColor, R.id.btnEightColor, R.id.btnNinethColor, R.id.btnTenthColor, R.id.btnEleventhColor, R.id.btnTwelvethColor, R.id.cancelButton})
+    @OnClick({R.id.btnFirstColor, R.id.btnSecondColor, R.id.btnThirdColor, R.id.btnFourthColor, R.id.btnFifthColor, R.id.btnSixthColor, R.id.btnSeventhColor, R.id.btnEightColor, R.id.btnNinethColor, R.id.btnTenthColor, R.id.btnEleventhColor, R.id.btnTwelvethColor, R.id.btnThirteenthColor, R.id.btnFourteenthColor, R.id.btnFifteenthColor, R.id.btnSixteenthColor, R.id.cancelButton})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnFirstColor:

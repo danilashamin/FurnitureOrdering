@@ -3,4 +3,7 @@
     <string name="make_order">Make order</string>
     <string name="choose_color">Choose color</string>
     <string name="cancel">Cancel</string>
+    <string name="email_succcess">Order successfully registered!</string>
+    <string name="email_fail">Unfortunately, we were unable to place an order.</string>
+    <string name="order_empty">The cart is empty</string>
 </resources>

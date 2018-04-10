@@ -4,10 +4,12 @@ import android.graphics.drawable.Drawable;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.mail.danilashamin.furnitureordering.mvp.App;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
@@ -131,6 +133,6 @@ public class MainPresenter extends MvpPresenter<MainView> {
     }
 
     public void buy() {
-
+        getViewState().buy(furnitureList);
     }
 }

@@ -1,9 +1,12 @@
 package ru.mail.danilashamin.furnitureordering.mvp.model;
 
+import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import java.util.Locale;
+
+import static android.view.Gravity.CENTER;
 
 public class Furniture {
     private FurnitureType type;
@@ -20,6 +23,8 @@ public class Furniture {
         this.layoutParams = new FrameLayout.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         layoutParams.width = 100;
         layoutParams.height = 100;
+        layoutParams.gravity = Gravity.CENTER;
+        article = "OK 3";
         setPrice();
     }
 
