@@ -75,6 +75,7 @@ public class FurnitureView extends AppCompatImageView {
         } else {
             fitoBitmap = null;
         }
+        invalidate();
     }
 
     @Override
