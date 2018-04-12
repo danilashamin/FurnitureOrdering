@@ -31,8 +31,8 @@ public class DialogEnterPhoneNumber {
     public DialogEnterPhoneNumber(Context context, DialogEnterPhoneNumberListener listener) {
         dialog = new MaterialDialog.Builder(context)
                 .customView(R.layout.dialog_phone_number, true)
-                .canceledOnTouchOutside(true)
-                .cancelable(true)
+                .canceledOnTouchOutside(false)
+                .cancelable(false)
                 .build();
         this.listener = listener;
 
