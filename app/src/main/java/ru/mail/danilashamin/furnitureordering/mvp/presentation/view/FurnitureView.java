@@ -10,16 +10,17 @@ import android.graphics.PorterDuffColorFilter;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
-import java.util.Locale;
-
 import ru.mail.danilashamin.furnitureordering.R;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 
 public class FurnitureView extends AppCompatImageView {
     private Furniture furniture;
 
-    private Bitmap bitmap;
-    private Paint paint;
+    private Bitmap furniturePicture;
+    private Bitmap fitoBitmap;
+
+    private Paint furniturePaint;
+    private Paint fitoPaint;
 
     public FurnitureView(Context context, Furniture furniture) {
         super(context);
@@ -41,31 +42,40 @@ public class FurnitureView extends AppCompatImageView {
     private void init() {
         switch (furniture.getType()) {
             case SINGLE_UNIT_MODULE:
-                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                furniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 break;
             case FOUR_UNIT_MODULE:
-                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                furniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 break;
             case EIGHT_UNIT_MODULE:
-                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                furniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 break;
             case PILLOW:
-                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                furniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 bringToFront();
                 break;
         }
         setLayoutParams(furniture.getLayoutParams());
 
-        bitmap = Bitmap.createScaledBitmap(bitmap, furniture.getLayoutParams().width, furniture.getLayoutParams().height, true);
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        furniturePicture = Bitmap.createScaledBitmap(furniturePicture, furniture.getLayoutParams().width, furniture.getLayoutParams().height, true);
+        furniturePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        fitoPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         setColorFilterOnBitmap(getResources().getColor(R.color.first_color));
     }
 
     public void setColorFilterOnBitmap(int color) {
-        paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+        furniturePaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
         invalidate();
     }
 
+    public void setFitoSelected(boolean selected) {
+        if (selected) {
+            fitoBitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_grass_picked), furniturePicture.getWidth() / 5, furniturePicture.getHeight() / 5, true);
+        } else {
+            fitoBitmap = null;
+        }
+    }
 
     @Override
     public boolean performClick() {
@@ -74,7 +84,11 @@ public class FurnitureView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, 0, 0, paint);
+        canvas.drawBitmap(furniturePicture, 0, 0, furniturePaint);
+        if (fitoBitmap == null) {
+            return;
+        }
+        canvas.drawBitmap(fitoBitmap, furniturePicture.getWidth() - fitoBitmap.getWidth(), furniturePicture.getHeight() - fitoBitmap.getHeight(), fitoPaint);
     }
 
     public Furniture getFurniture() {
