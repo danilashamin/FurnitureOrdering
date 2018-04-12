@@ -12,6 +12,7 @@ import java.util.List;
 import ru.mail.danilashamin.furnitureordering.mvp.App;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
+import ru.mail.danilashamin.furnitureordering.mvp.model.ZodiacSign;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
 
 @InjectViewState
@@ -128,8 +129,20 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().dismissColorPickerDialog();
     }
 
-    public void selectFito() {
+    public void showSelectFitoDialog() {
+        getViewState().showFitoPickerDialog(currentFurniture == null ? null : currentFurniture.getSign());
+    }
 
+    public void dismissSelectFitoDialog() {
+        getViewState().dismissFitoPickerDialog();
+    }
+
+    public void setFitoOnCurrentFurniture(ZodiacSign sign) {
+        if (currentFurniture == null) {
+            return;
+        }
+        currentFurniture.setSign(sign);
+        getViewState().changeFitoOnCurrentFurnitureView(currentFurniture, sign != null);
     }
 
     public void buy() {

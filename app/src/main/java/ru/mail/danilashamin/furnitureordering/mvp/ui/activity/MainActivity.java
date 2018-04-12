@@ -28,11 +28,14 @@ import butterknife.OnClick;
 import ru.mail.danilashamin.furnitureordering.R;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
+import ru.mail.danilashamin.furnitureordering.mvp.model.ZodiacSign;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.presenter.MainPresenter;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.FurnitureView;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.ColorPickerDialog;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.ColorPickerDialogListener;
+import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.FitoPickerDialog;
+import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.FitoPickerDialogListener;
 
 import static ru.mail.danilashamin.furnitureordering.mvp.model.Constants.EMAIL.MAILTO;
 import static ru.mail.danilashamin.furnitureordering.mvp.model.Constants.EMAIL.PASSWORD;
@@ -76,6 +79,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     ImageView btnAddPillow;
 
     private ColorPickerDialog colorPickerDialog;
+    private FitoPickerDialog fitoPickerDialog;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -96,6 +100,20 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                 mainPresenter.dismissColorPickerDialog();
             }
         });
+
+        fitoPickerDialog = new FitoPickerDialog(this, new FitoPickerDialogListener() {
+            @Override
+            public void onFitoPicked(ZodiacSign sign) {
+                mainPresenter.setFitoOnCurrentFurniture(sign);
+                mainPresenter.dismissSelectFitoDialog();
+            }
+
+            @Override
+            public void onDismiss() {
+                mainPresenter.dismissSelectFitoDialog();
+            }
+        });
+
         photoView.addCameraListener(new CameraListener() {
             @Override
             public void onPictureTaken(byte[] jpeg) {
@@ -250,6 +268,21 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                 .send();
     }
 
+    @Override
+    public void showFitoPickerDialog(ZodiacSign currentFurnitureZodiacSign) {
+        fitoPickerDialog.show(currentFurnitureZodiacSign);
+    }
+
+    @Override
+    public void dismissFitoPickerDialog() {
+        fitoPickerDialog.dismiss();
+    }
+
+    @Override
+    public void changeFitoOnCurrentFurnitureView(Furniture currentFurniture, boolean selected) {
+        findFurnitureView(currentFurniture).setFitoSelected(selected);
+    }
+
 
     @OnClick(R.id.btnBuy)
     public void onBtnBuyClicked() {
@@ -292,7 +325,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @OnClick(R.id.btnSelectFito)
     public void onbtnSelectFitoClicked() {
-        mainPresenter.selectFito();
+        mainPresenter.showSelectFitoDialog();
     }
 
 

@@ -11,6 +11,7 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import java.util.List;
 
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
+import ru.mail.danilashamin.furnitureordering.mvp.model.ZodiacSign;
 
 public interface MainView extends MvpView {
     @StateStrategyType(AddToEndStrategy.class)
@@ -63,4 +64,13 @@ public interface MainView extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void buy(List<Furniture> furnitureList);
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void showFitoPickerDialog(ZodiacSign currentFurnitureZodiacSign);
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void dismissFitoPickerDialog();
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void changeFitoOnCurrentFurnitureView(Furniture currentFurniture, boolean selected);
 }

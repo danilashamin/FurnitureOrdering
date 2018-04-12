@@ -72,4 +72,8 @@ public class Furniture {
     public void setSign(ZodiacSign sign) {
         this.sign = sign;
     }
+
+    public ZodiacSign getSign() {
+        return sign;
+    }
 }
