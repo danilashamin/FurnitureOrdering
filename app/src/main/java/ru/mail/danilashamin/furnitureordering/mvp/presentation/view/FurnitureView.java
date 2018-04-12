@@ -17,7 +17,6 @@ import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 
 public class FurnitureView extends AppCompatImageView {
     private Furniture furniture;
-    public static final String FURNITURE_VIEW_TAG = "FURNITURE_VIEW_";
 
     private Bitmap bitmap;
     private Paint paint;
@@ -25,7 +24,7 @@ public class FurnitureView extends AppCompatImageView {
     public FurnitureView(Context context, Furniture furniture) {
         super(context);
         this.furniture = furniture;
-        setTag(String.format(Locale.getDefault(), "%s%d", FURNITURE_VIEW_TAG, furniture.getID()));
+        setTag(furniture.getId());
         init();
     }
 

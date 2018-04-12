@@ -8,16 +8,16 @@ import java.util.Locale;
 
 public class Furniture {
     private FurnitureType type;
-    private Integer ID;
+    private Integer Id;
     private Double price;
     private String article;
     private ZodiacSign sign;
 
     private FrameLayout.LayoutParams layoutParams;
 
-    public Furniture(FurnitureType type, int ID) {
+    public Furniture(FurnitureType type, int Id) {
         this.type = type;
-        this.ID = ID;
+        this.Id = Id;
         price = FurnitureType.getPriceByType(type);
         article = "OK 3";
         initLayoutParams();
@@ -34,8 +34,8 @@ public class Furniture {
         return type;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return Id;
     }
 
     public void setLayoutParams(FrameLayout.LayoutParams layoutParams) {
@@ -58,7 +58,7 @@ public class Furniture {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(String.format(Locale.getDefault(), "№ %d\n", ID));
+        builder.append(String.format(Locale.getDefault(), "№ %d\n", Id));
         builder.append(FurnitureType.getNameByType(type));
         builder.append("Вид товара: ").append(type).append("\n");
         builder.append("Артикул цвета: ").append(article).append("\n");

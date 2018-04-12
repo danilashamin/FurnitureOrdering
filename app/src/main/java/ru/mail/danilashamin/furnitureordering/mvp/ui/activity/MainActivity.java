@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -22,13 +21,11 @@ import com.otaliastudios.cameraview.CameraUtils;
 import com.otaliastudios.cameraview.CameraView;
 
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.mail.danilashamin.furnitureordering.R;
-import ru.mail.danilashamin.furnitureordering.mvp.App;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.presenter.MainPresenter;
@@ -41,7 +38,6 @@ import static ru.mail.danilashamin.furnitureordering.mvp.model.Constants.EMAIL.M
 import static ru.mail.danilashamin.furnitureordering.mvp.model.Constants.EMAIL.PASSWORD;
 import static ru.mail.danilashamin.furnitureordering.mvp.model.Constants.EMAIL.SUBJECT;
 import static ru.mail.danilashamin.furnitureordering.mvp.model.Constants.EMAIL.USERNAME;
-import static ru.mail.danilashamin.furnitureordering.mvp.presentation.view.FurnitureView.FURNITURE_VIEW_TAG;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView {
 
@@ -171,7 +167,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
     private FurnitureView findFurnitureView(Furniture furniture) {
-        return fieldForFurniture.findViewWithTag(String.format(Locale.getDefault(), "%s%d", FURNITURE_VIEW_TAG, furniture.getID()));
+        return fieldForFurniture.findViewWithTag(furniture.getId());
     }
 
     @Override
