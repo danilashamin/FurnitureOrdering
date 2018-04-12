@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,8 @@ import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.FurnitureVie
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.ColorPickerDialog;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.ColorPickerDialogListener;
+import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.DialogEnterPhoneNumber;
+import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.DialogEnterPhoneNumberListener;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.FitoPickerDialog;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.FitoPickerDialogListener;
 
@@ -80,14 +83,26 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     private ColorPickerDialog colorPickerDialog;
     private FitoPickerDialog fitoPickerDialog;
+    private DialogEnterPhoneNumber enterPhoneNumberDialog;
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        initDialogs();
+        initPhotoView();
+        initFurnitureFieldView();
+    }
+
+    public void initDialogs() {
+        initColorPickerDialog();
+        initFitoPickerDialog();
+        initPhoneNumberDialog();
+    }
+
+    public void initColorPickerDialog() {
         colorPickerDialog = new ColorPickerDialog(this, new ColorPickerDialogListener() {
             @Override
             public void onColorPicked(int color, String article) {
@@ -100,7 +115,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                 mainPresenter.dismissColorPickerDialog();
             }
         });
+    }
 
+    public void initFitoPickerDialog() {
         fitoPickerDialog = new FitoPickerDialog(this, new FitoPickerDialogListener() {
             @Override
             public void onFitoPicked(ZodiacSign sign) {
@@ -113,7 +130,23 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                 mainPresenter.dismissSelectFitoDialog();
             }
         });
+    }
 
+    public void initPhoneNumberDialog() {
+        enterPhoneNumberDialog = new DialogEnterPhoneNumber(this, new DialogEnterPhoneNumberListener() {
+            @Override
+            public void onMakeOrder(@NonNull String phoneNumber) {
+
+            }
+
+            @Override
+            public void onDismiss() {
+
+            }
+        });
+    }
+
+    public void initPhotoView() {
         photoView.addCameraListener(new CameraListener() {
             @Override
             public void onPictureTaken(byte[] jpeg) {
@@ -124,13 +157,15 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                         });
             }
         });
+    }
 
+    @SuppressLint("ClickableViewAccessibility")
+    public void initFurnitureFieldView() {
         fieldForFurniture.setOnTouchListener((v, event) -> {
             mainPresenter.unsetCurrentFurniture();
             return true;
         });
     }
-
 
     @Override
     protected void onPause() {

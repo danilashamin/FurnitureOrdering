@@ -9,4 +9,5 @@
     <string name="order_empty">Козина пуста</string>
     <string name="choose_zodiac_sign">Выберите знак зодиака</string>
     <string name="accept">Принять</string>
+    <string name="enter_phone_number">Пожалуйста, оставьте телефонный номер. В ближайшее время мы вам перезвоним.</string>
 </resources>
