@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,10 @@ import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.MainView;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.ColorPickerDialog;
 import ru.mail.danilashamin.furnitureordering.mvp.presentation.view.dialog.ColorPickerDialogListener;
 
+import static ru.mail.danilashamin.furnitureordering.mvp.model.Constants.EMAIL.MAILTO;
+import static ru.mail.danilashamin.furnitureordering.mvp.model.Constants.EMAIL.PASSWORD;
+import static ru.mail.danilashamin.furnitureordering.mvp.model.Constants.EMAIL.SUBJECT;
+import static ru.mail.danilashamin.furnitureordering.mvp.model.Constants.EMAIL.USERNAME;
 import static ru.mail.danilashamin.furnitureordering.mvp.presentation.view.FurnitureView.FURNITURE_VIEW_TAG;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView {
@@ -236,12 +241,13 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         for (Furniture furniture : furnitureList) {
             stringBuilder.append(furniture.toString());
         }
+
         BackgroundMail.newBuilder(this)
-                .withUsername("suncoinfurnitureneworder@gmail.com")
-                .withPassword("akofcNl7")
-                .withMailto("danilashamin@mail.ru")
+                .withUsername(USERNAME)
+                .withPassword(PASSWORD)
+                .withMailto(MAILTO)
                 .withType(BackgroundMail.TYPE_PLAIN)
-                .withSubject("Новый заказ")
+                .withSubject(SUBJECT)
                 .withBody(stringBuilder.toString())
                 .withOnSuccessCallback(() -> Toast.makeText(this, getString(R.string.email_succcess), Toast.LENGTH_LONG).show())
                 .withOnFailCallback(() -> Toast.makeText(this, getString(R.string.email_fail), Toast.LENGTH_LONG).show())
