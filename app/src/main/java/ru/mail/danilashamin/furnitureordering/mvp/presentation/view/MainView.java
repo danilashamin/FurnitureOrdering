@@ -42,6 +42,18 @@ public interface MainView extends MvpView {
     void dismissColorPickerDialog();
 
     @StateStrategyType(AddToEndStrategy.class)
+    void showFitoPickerDialog(ZodiacSign currentFurnitureZodiacSign);
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void dismissFitoPickerDialog();
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void showPhoneNumberDialog();
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void dismissPhoneNumberDialog();
+
+    @StateStrategyType(AddToEndStrategy.class)
     void changeCurrentFurnitureColor(int color, Furniture currentFurniture);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
@@ -63,14 +75,12 @@ public interface MainView extends MvpView {
     void setPrice(double price);
 
     @StateStrategyType(SkipStrategy.class)
-    void buy(List<Furniture> furnitureList);
+    void buy(String order);
 
-    @StateStrategyType(AddToEndStrategy.class)
-    void showFitoPickerDialog(ZodiacSign currentFurnitureZodiacSign);
-
-    @StateStrategyType(AddToEndStrategy.class)
-    void dismissFitoPickerDialog();
 
     @StateStrategyType(AddToEndStrategy.class)
     void changeFitoOnCurrentFurnitureView(Furniture currentFurniture, boolean selected);
+
+    @StateStrategyType(SkipStrategy.class)
+    void showEmptyOrderMessage();
 }

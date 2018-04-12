@@ -1,15 +1,14 @@
 package ru.mail.danilashamin.furnitureordering.mvp.presentation.presenter;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.mail.danilashamin.furnitureordering.mvp.App;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 import ru.mail.danilashamin.furnitureordering.mvp.model.FurnitureType;
 import ru.mail.danilashamin.furnitureordering.mvp.model.ZodiacSign;
@@ -145,7 +144,24 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().changeFitoOnCurrentFurnitureView(currentFurniture, sign != null);
     }
 
-    public void buy() {
-        getViewState().buy(furnitureList);
+    public void buy(@NonNull String phoneNumber) {
+        if (furnitureList.isEmpty()) {
+            getViewState().showEmptyOrderMessage();
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Содержание заказа: \n");
+        stringBuilder.append("Номер телефона: ").append(phoneNumber).append("\n");
+        for (Furniture furniture : furnitureList) {
+            stringBuilder.append(furniture.toString());
+        }
+        getViewState().buy(stringBuilder.toString());
+    }
+
+    public void showEnterPhoneNumberDialog() {
+        getViewState().showPhoneNumberDialog();
+    }
+
+    public void dismissEnterPhoneNumberDialog() {
+        getViewState().dismissPhoneNumberDialog();
     }
 }

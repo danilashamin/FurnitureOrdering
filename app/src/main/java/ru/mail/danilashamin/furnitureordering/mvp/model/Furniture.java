@@ -59,8 +59,7 @@ public class Furniture {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(String.format(Locale.getDefault(), "№ %d\n", Id));
-        builder.append(FurnitureType.getNameByType(type));
-        builder.append("Вид товара: ").append(type).append("\n");
+        builder.append("Вид товара: ").append(FurnitureType.getNameByType(type)).append("\n");
         builder.append("Артикул цвета: ").append(article).append("\n");
         if (sign != null) {
             builder.append("Знак зодиака фитосостава: ").append(sign.getZodiacName()).append("\n");

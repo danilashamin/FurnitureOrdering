@@ -15,7 +15,7 @@ import butterknife.OnClick;
 import ru.mail.danilashamin.furnitureordering.R;
 
 public class DialogEnterPhoneNumber {
-    private final static Integer LENGTH_OF_NUMBER = 17;
+    private final static Integer LENGTH_OF_NUMBER = 10;
 
     @BindView(R.id.phoneEditText)
     MaskedEditText phoneEditText;
@@ -48,9 +48,11 @@ public class DialogEnterPhoneNumber {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() == LENGTH_OF_NUMBER) {
+                if (phoneEditText.getRawText().length() == LENGTH_OF_NUMBER) {
                     phoneNumber = s.toString();
                     makeOrderButton.setEnabled(true);
+                } else {
+                    makeOrderButton.setEnabled(false);
                 }
             }
 
@@ -59,6 +61,7 @@ public class DialogEnterPhoneNumber {
 
             }
         });
+
     }
 
     public void show() {

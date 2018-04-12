@@ -136,12 +136,13 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         enterPhoneNumberDialog = new DialogEnterPhoneNumber(this, new DialogEnterPhoneNumberListener() {
             @Override
             public void onMakeOrder(@NonNull String phoneNumber) {
-
+                mainPresenter.buy(phoneNumber);
+                mainPresenter.dismissEnterPhoneNumberDialog();
             }
 
             @Override
             public void onDismiss() {
-
+                mainPresenter.dismissEnterPhoneNumberDialog();
             }
         });
     }
@@ -279,29 +280,20 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         tvPrice.setText(String.format("\u20BD%s", String.valueOf(price)));
     }
 
-
     @Override
-    public void buy(List<Furniture> furnitureList) {
-        if (furnitureList.isEmpty()) {
-            Toast.makeText(this, getString(R.string.order_empty), Toast.LENGTH_SHORT).show();
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Содержание заказа: \n");
-        for (Furniture furniture : furnitureList) {
-            stringBuilder.append(furniture.toString());
-        }
-
+    public void buy(String order) {
         BackgroundMail.newBuilder(this)
                 .withUsername(USERNAME)
                 .withPassword(PASSWORD)
                 .withMailto(MAILTO)
                 .withType(BackgroundMail.TYPE_PLAIN)
                 .withSubject(SUBJECT)
-                .withBody(stringBuilder.toString())
+                .withBody(order)
                 .withOnSuccessCallback(() -> Toast.makeText(this, getString(R.string.email_succcess), Toast.LENGTH_LONG).show())
                 .withOnFailCallback(() -> Toast.makeText(this, getString(R.string.email_fail), Toast.LENGTH_LONG).show())
                 .send();
     }
+
 
     @Override
     public void showFitoPickerDialog(ZodiacSign currentFurnitureZodiacSign) {
@@ -314,14 +306,29 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
     @Override
+    public void showPhoneNumberDialog() {
+        enterPhoneNumberDialog.show();
+    }
+
+    @Override
+    public void dismissPhoneNumberDialog() {
+        enterPhoneNumberDialog.dismiss();
+    }
+
+    @Override
     public void changeFitoOnCurrentFurnitureView(Furniture currentFurniture, boolean selected) {
         findFurnitureView(currentFurniture).setFitoSelected(selected);
+    }
+
+    @Override
+    public void showEmptyOrderMessage() {
+        Toast.makeText(this, getString(R.string.order_empty), Toast.LENGTH_SHORT).show();
     }
 
 
     @OnClick(R.id.btnBuy)
     public void onBtnBuyClicked() {
-        mainPresenter.buy();
+        mainPresenter.showEnterPhoneNumberDialog();
     }
 
 
