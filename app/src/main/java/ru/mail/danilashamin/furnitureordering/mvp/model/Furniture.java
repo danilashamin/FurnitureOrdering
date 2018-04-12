@@ -63,7 +63,7 @@ public class Furniture {
         builder.append("Вид товара: ").append(type).append("\n");
         builder.append("Артикул цвета: ").append(article).append("\n");
         if (sign != null) {
-            builder.append("Знак зодиака фитосостава: ").append(ZodiacSign.getZodiacSign(sign)).append("\n");
+            builder.append("Знак зодиака фитосостава: ").append(sign.getZodiacName()).append("\n");
         }
         builder.append("Цена: ").append(price).append("\n");
         return builder.toString();

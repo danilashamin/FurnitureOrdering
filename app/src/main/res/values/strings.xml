@@ -6,4 +6,21 @@
     <string name="email_succcess">Order successfully registered!</string>
     <string name="email_fail">Unfortunately, we were unable to place an order.</string>
     <string name="order_empty">The cart is empty</string>
+    <string name="choose_zodiac_sign">Choose zodiac sign</string>
+    <string-array name="zodiacs">
+        <item>Не выбрано</item>
+        <item>Овен</item>
+        <item>Телец</item>
+        <item>Близнецы</item>
+        <item>Рак</item>
+        <item>Лев</item>
+        <item>Дева</item>
+        <item>Весы</item>
+        <item>Скорпион</item>
+        <item>Стрелец</item>
+        <item>Козерог</item>
+        <item>Водолей</item>
+        <item>Рыбы</item>
+    </string-array>
+    <string name="accept">Accept</string>
 </resources>
