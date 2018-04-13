@@ -106,11 +106,13 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/linearLayout4"
@@ -139,7 +141,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/sofa" />
 
 
         </LinearLayout>
@@ -147,7 +149,7 @@
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
@@ -177,10 +179,12 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/linearLayout5">
 
             <TextView
@@ -205,10 +209,12 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/linearLayout">
 
             <TextView

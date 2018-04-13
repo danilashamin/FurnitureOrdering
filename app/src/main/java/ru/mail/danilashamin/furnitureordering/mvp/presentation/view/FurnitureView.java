@@ -132,6 +132,6 @@ public class FurnitureView extends AppCompatImageView {
 
     private void setCurrentFurniturePicture(int index) {
         currentFurniturePicture = listOfPictures.get(index);
-
+        invalidate();
     }
 }

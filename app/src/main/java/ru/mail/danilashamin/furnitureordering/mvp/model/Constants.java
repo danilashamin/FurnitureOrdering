@@ -37,7 +37,7 @@ public class Constants {
     public static final class EMAIL {
         public static final String USERNAME = "suncoinfurnitureneworder@gmail.com";
         public static final String PASSWORD = "akofcNl7";
-        public static final String MAILTO = "danilashamin@mail.ru";
+        public static final String MAILTO = "shcherbakvadim@gmail.com";
         public static final String SUBJECT = "Новый заказ: \n";
 
     }
