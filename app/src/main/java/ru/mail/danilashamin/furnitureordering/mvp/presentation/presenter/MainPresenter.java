@@ -154,6 +154,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
         for (Furniture furniture : furnitureList) {
             stringBuilder.append(furniture.toString());
         }
+        stringBuilder.append("Суммарная стоимость заказа").append(String.valueOf(totalValue)).append(" р.\n");
         getViewState().buy(stringBuilder.toString());
     }
 
@@ -163,5 +164,9 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     public void dismissEnterPhoneNumberDialog() {
         getViewState().dismissPhoneNumberDialog();
+    }
+
+    public void changeFurniturePicture(Furniture furniture) {
+        getViewState().changeFurniturePicture(furniture);
     }
 }

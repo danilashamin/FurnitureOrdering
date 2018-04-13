@@ -10,17 +10,24 @@ import android.graphics.PorterDuffColorFilter;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ru.mail.danilashamin.furnitureordering.R;
 import ru.mail.danilashamin.furnitureordering.mvp.model.Furniture;
 
 public class FurnitureView extends AppCompatImageView {
     private Furniture furniture;
 
-    private Bitmap furniturePicture;
+    private Bitmap currentFurniturePicture;
     private Bitmap fitoBitmap;
 
     private Paint furniturePaint;
     private Paint fitoPaint;
+
+    List<Bitmap> listOfPictures;
+
+    int indexOfCurrentPicture;
 
     public FurnitureView(Context context, Furniture furniture) {
         super(context);
@@ -40,24 +47,31 @@ public class FurnitureView extends AppCompatImageView {
     }
 
     private void init() {
+        listOfPictures = new ArrayList<>();
+        indexOfCurrentPicture = 0;
         switch (furniture.getType()) {
             case SINGLE_UNIT_MODULE:
-                furniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                listOfPictures.add(currentFurniturePicture);
+                listOfPictures.add(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sofa), 100, 100, true));
                 break;
             case FOUR_UNIT_MODULE:
-                furniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                listOfPictures.add(currentFurniturePicture);
                 break;
             case EIGHT_UNIT_MODULE:
-                furniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                listOfPictures.add(currentFurniturePicture);
                 break;
             case PILLOW:
-                furniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                listOfPictures.add(currentFurniturePicture);
                 bringToFront();
                 break;
         }
         setLayoutParams(furniture.getLayoutParams());
 
-        furniturePicture = Bitmap.createScaledBitmap(furniturePicture, furniture.getLayoutParams().width, furniture.getLayoutParams().height, true);
+        currentFurniturePicture = Bitmap.createScaledBitmap(currentFurniturePicture, furniture.getLayoutParams().width, furniture.getLayoutParams().height, true);
         furniturePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
         fitoPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -71,7 +85,7 @@ public class FurnitureView extends AppCompatImageView {
 
     public void setFitoSelected(boolean selected) {
         if (selected) {
-            fitoBitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_grass_picked), furniturePicture.getWidth() / 5, furniturePicture.getHeight() / 5, true);
+            fitoBitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_grass_picked), currentFurniturePicture.getWidth() / 5, currentFurniturePicture.getHeight() / 5, true);
         } else {
             fitoBitmap = null;
         }
@@ -85,11 +99,11 @@ public class FurnitureView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(furniturePicture, 0, 0, furniturePaint);
+        canvas.drawBitmap(currentFurniturePicture, 0, 0, furniturePaint);
         if (fitoBitmap == null) {
             return;
         }
-        canvas.drawBitmap(fitoBitmap, furniturePicture.getWidth() - fitoBitmap.getWidth(), furniturePicture.getHeight() - fitoBitmap.getHeight(), fitoPaint);
+        canvas.drawBitmap(fitoBitmap, currentFurniturePicture.getWidth() - fitoBitmap.getWidth(), currentFurniturePicture.getHeight() - fitoBitmap.getHeight(), fitoPaint);
     }
 
     public Furniture getFurniture() {
@@ -104,5 +118,20 @@ public class FurnitureView extends AppCompatImageView {
     public void unsetCurrent() {
         setBackground(null);
         invalidate();
+    }
+
+    public void changePicture() {
+        if (indexOfCurrentPicture == listOfPictures.size() - 1) {
+            indexOfCurrentPicture = 0;
+            setCurrentFurniturePicture(indexOfCurrentPicture);
+        } else {
+            indexOfCurrentPicture++;
+            setCurrentFurniturePicture(indexOfCurrentPicture);
+        }
+    }
+
+    private void setCurrentFurniturePicture(int index) {
+        currentFurniturePicture = listOfPictures.get(index);
+
     }
 }

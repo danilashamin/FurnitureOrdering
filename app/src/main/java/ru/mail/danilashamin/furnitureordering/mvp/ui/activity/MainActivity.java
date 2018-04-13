@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -325,6 +326,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         Toast.makeText(this, getString(R.string.order_empty), Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void changeFurniturePicture(Furniture furniture) {
+        findFurnitureView(furniture).changePicture();
+    }
+
 
     @OnClick(R.id.btnBuy)
     public void onBtnBuyClicked() {
@@ -375,13 +381,26 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         private int _xDelta;
         private int _yDelta;
         private Furniture furniture;
+        private GestureDetector gestureDetector;
 
         OnFurnitureTouchListener(Furniture furniture) {
             this.furniture = furniture;
+            initGestureDetector();
+        }
+
+        void initGestureDetector() {
+            gestureDetector = new GestureDetector(MainActivity.this, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    mainPresenter.changeFurniturePicture(furniture);
+                    return super.onDoubleTap(e);
+                }
+            });
         }
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
+            gestureDetector.onTouchEvent(event);
             final int X = (int) event.getRawX();
             final int Y = (int) event.getRawY();
             switch (event.getAction() & MotionEvent.ACTION_MASK) {

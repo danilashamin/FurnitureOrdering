@@ -83,4 +83,7 @@ public interface MainView extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void showEmptyOrderMessage();
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void changeFurniturePicture(Furniture furniture);
 }
