@@ -77,7 +77,7 @@ public class ColorPickerDialog {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnFirstColor:
-               // listener.onColorPicked(resources.getColor(R.color.first_color), "OK 3");
+                listener.onColorPicked(resources.getColor(R.color.first_color), "OK 3");
                 break;
             case R.id.btnSecondColor:
                 listener.onColorPicked(resources.getColor(R.color.second_color), "OK 4");

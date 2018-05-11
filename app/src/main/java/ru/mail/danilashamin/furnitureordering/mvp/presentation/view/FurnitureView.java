@@ -76,11 +76,15 @@ public class FurnitureView extends AppCompatImageView {
         furniturePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
         fitoPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-       // setColorFilterOnBitmap(getResources().getColor(R.color.first_color));
+        // setColorFilterOnBitmap(getResources().getColor(R.color.first_color));
     }
 
     public void setColorFilterOnBitmap(int color) {
-        furniturePaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+        if (color == getResources().getColor(R.color.first_color)) {
+            furniturePaint.setColorFilter(null);
+        } else {
+            furniturePaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+        }
         invalidate();
     }
 
