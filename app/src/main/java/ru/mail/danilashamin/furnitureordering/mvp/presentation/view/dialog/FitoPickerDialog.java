@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -20,6 +21,8 @@ public class FitoPickerDialog {
     private FitoPickerDialogListener listener;
     private ZodiacSign sign;
 
+    @BindView(R.id.tvComposition)
+    TextView tvComposition;
     @BindView(R.id.spinner)
     Spinner spinner;
     @BindView(R.id.acceptBtn)
@@ -39,6 +42,9 @@ public class FitoPickerDialog {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sign = ZodiacSign.getZodiacSign(position);
+                if (sign != null) {
+                    tvComposition.setText(sign.getComposition());
+                }
             }
 
             @Override

@@ -22,8 +22,6 @@ import com.otaliastudios.cameraview.CameraListener;
 import com.otaliastudios.cameraview.CameraUtils;
 import com.otaliastudios.cameraview.CameraView;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -318,7 +316,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void changeFitoOnCurrentFurnitureView(Furniture currentFurniture, boolean selected) {
-        findFurnitureView(currentFurniture).setFitoSelected(selected);
+        FurnitureView view = findFurnitureView(currentFurniture);
+        if (view != null) {
+            view.setFitoSelected(selected);
+        }
     }
 
     @Override
@@ -328,7 +329,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void changeFurniturePicture(Furniture furniture) {
-        findFurnitureView(furniture).changePicture();
+        findFurnitureView(furniture).rotatePicture();
     }
 
 
@@ -360,13 +361,13 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                 mainPresenter.addFurniture(FurnitureType.SINGLE_UNIT_MODULE);
                 break;
             case R.id.btnAddFourModuleUnit:
-                mainPresenter.addFurniture(FurnitureType.FOUR_UNIT_MODULE);
+                mainPresenter.addFurniture(FurnitureType.DOUBLE_UNIT_MODULE);
                 break;
             case R.id.btnAddEightModuleUnit:
-                mainPresenter.addFurniture(FurnitureType.EIGHT_UNIT_MODULE);
+                mainPresenter.addFurniture(FurnitureType.TRIPLE_UNIT_MODULE);
                 break;
             case R.id.btnAddPillow:
-                mainPresenter.addFurniture(FurnitureType.PILLOW);
+                mainPresenter.addFurniture(FurnitureType.FOURTH_MODULE_UNIT);
                 break;
         }
     }

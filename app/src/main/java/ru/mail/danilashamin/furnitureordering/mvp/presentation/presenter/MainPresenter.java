@@ -36,13 +36,13 @@ public class MainPresenter extends MvpPresenter<MainView> {
             case SINGLE_UNIT_MODULE:
                 getViewState().setSingleUnitModuleCounter(++singleUnitModuleCounter);
                 break;
-            case FOUR_UNIT_MODULE:
+            case DOUBLE_UNIT_MODULE:
                 getViewState().setFourUnitModuleCounter(++fourUnitModuleCounter);
                 break;
-            case EIGHT_UNIT_MODULE:
+            case TRIPLE_UNIT_MODULE:
                 getViewState().setEightUnitModuleCounter(++eightUnitModuleCounter);
                 break;
-            case PILLOW:
+            case FOURTH_MODULE_UNIT:
                 getViewState().setPillowCounter(++pillowCounter);
                 break;
 
@@ -83,13 +83,13 @@ public class MainPresenter extends MvpPresenter<MainView> {
             case SINGLE_UNIT_MODULE:
                 getViewState().setSingleUnitModuleCounter(--singleUnitModuleCounter);
                 break;
-            case FOUR_UNIT_MODULE:
+            case DOUBLE_UNIT_MODULE:
                 getViewState().setFourUnitModuleCounter(--fourUnitModuleCounter);
                 break;
-            case EIGHT_UNIT_MODULE:
+            case TRIPLE_UNIT_MODULE:
                 getViewState().setEightUnitModuleCounter(--eightUnitModuleCounter);
                 break;
-            case PILLOW:
+            case FOURTH_MODULE_UNIT:
                 getViewState().setPillowCounter(--pillowCounter);
                 break;
         }

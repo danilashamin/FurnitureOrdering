@@ -141,7 +141,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                android:src="@drawable/sofa" />
+                android:src="@drawable/single_unit_module" />
 
 
         </LinearLayout>
@@ -171,7 +171,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/double_unit_module_first" />
 
 
         </LinearLayout>
@@ -201,7 +201,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/triple_unit_module" />
 
 
         </LinearLayout>
@@ -231,7 +231,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/fourth_unit_module" />
 
 
         </LinearLayout>

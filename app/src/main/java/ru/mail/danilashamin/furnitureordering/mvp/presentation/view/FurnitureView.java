@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -51,21 +52,21 @@ public class FurnitureView extends AppCompatImageView {
         indexOfCurrentPicture = 0;
         switch (furniture.getType()) {
             case SINGLE_UNIT_MODULE:
-                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-                listOfPictures.add(currentFurniturePicture);
-                listOfPictures.add(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sofa), 100, 100, true));
+                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.drawable.single_unit_module);
+                //listOfPictures.add(currentFurniturePicture);
+                //listOfPictures.add(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sofa), 100, 100, true));
                 break;
-            case FOUR_UNIT_MODULE:
-                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-                listOfPictures.add(currentFurniturePicture);
+            case DOUBLE_UNIT_MODULE:
+                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.drawable.double_unit_module_first);
+                //listOfPictures.add(currentFurniturePicture);
                 break;
-            case EIGHT_UNIT_MODULE:
-                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-                listOfPictures.add(currentFurniturePicture);
+            case TRIPLE_UNIT_MODULE:
+                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.drawable.triple_unit_module);
+                // listOfPictures.add(currentFurniturePicture);
                 break;
-            case PILLOW:
-                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-                listOfPictures.add(currentFurniturePicture);
+            case FOURTH_MODULE_UNIT:
+                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.drawable.fourth_unit_module);
+                //listOfPictures.add(currentFurniturePicture);
                 bringToFront();
                 break;
         }
@@ -75,7 +76,7 @@ public class FurnitureView extends AppCompatImageView {
         furniturePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
         fitoPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        setColorFilterOnBitmap(getResources().getColor(R.color.first_color));
+       // setColorFilterOnBitmap(getResources().getColor(R.color.first_color));
     }
 
     public void setColorFilterOnBitmap(int color) {
@@ -120,14 +121,21 @@ public class FurnitureView extends AppCompatImageView {
         invalidate();
     }
 
-    public void changePicture() {
-        if (indexOfCurrentPicture == listOfPictures.size() - 1) {
+    public void rotatePicture() {
+      /*  if (indexOfCurrentPicture == listOfPictures.size() - 1) {
             indexOfCurrentPicture = 0;
             setCurrentFurniturePicture(indexOfCurrentPicture);
         } else {
             indexOfCurrentPicture++;
             setCurrentFurniturePicture(indexOfCurrentPicture);
-        }
+        }*/
+        Matrix matrix = new Matrix();
+
+        matrix.postRotate(90);
+
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(currentFurniturePicture, currentFurniturePicture.getWidth(), currentFurniturePicture.getHeight(), true);
+
+        currentFurniturePicture = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
     }
 
     private void setCurrentFurniturePicture(int index) {

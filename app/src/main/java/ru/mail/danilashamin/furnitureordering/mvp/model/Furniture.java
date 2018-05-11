@@ -20,13 +20,30 @@ public class Furniture {
         this.Id = Id;
         price = FurnitureType.getPriceByType(type);
         article = "OK 3";
-        initLayoutParams();
+        initLayoutParams(type);
     }
 
-    private void initLayoutParams() {
+    private void initLayoutParams(FurnitureType type) {
         layoutParams = new FrameLayout.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        layoutParams.width = 100;
-        layoutParams.height = 100;
+        switch (type) {
+            case SINGLE_UNIT_MODULE:
+                layoutParams.width = 200;
+                layoutParams.height = 200;
+                break;
+            case DOUBLE_UNIT_MODULE:
+                layoutParams.width = 200;
+                layoutParams.height = 200;
+                break;
+            case TRIPLE_UNIT_MODULE:
+                layoutParams.width = 300;
+                layoutParams.height = 200;
+                break;
+            case FOURTH_MODULE_UNIT:
+                layoutParams.width = 500;
+                layoutParams.height = 200;
+                break;
+
+        }
         layoutParams.gravity = Gravity.CENTER;
     }
 

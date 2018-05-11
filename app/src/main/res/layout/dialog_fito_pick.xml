@@ -13,6 +13,13 @@
         android:entries="@array/zodiacs"
         android:prompt="@string/choose_zodiac_sign" />
 
+    <TextView
+        android:id="@+id/tvComposition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
