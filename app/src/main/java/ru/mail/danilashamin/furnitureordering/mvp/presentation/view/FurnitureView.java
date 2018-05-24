@@ -26,7 +26,7 @@ public class FurnitureView extends AppCompatImageView {
     private Paint furniturePaint;
     private Paint fitoPaint;
 
-    List<Bitmap> listOfPictures;
+    List<Integer> listOfPicturesResourcesIds;
 
     int indexOfCurrentPicture;
 
@@ -48,31 +48,40 @@ public class FurnitureView extends AppCompatImageView {
     }
 
     private void init() {
-        listOfPictures = new ArrayList<>();
+        listOfPicturesResourcesIds = new ArrayList<>();
         indexOfCurrentPicture = 0;
         switch (furniture.getType()) {
             case SINGLE_UNIT_MODULE:
-                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.drawable.single_unit_module);
-                //listOfPictures.add(currentFurniturePicture);
-                //listOfPictures.add(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sofa), 100, 100, true));
+                listOfPicturesResourcesIds.add(R.drawable.single_first);
+                listOfPicturesResourcesIds.add(R.drawable.single_second);
+                listOfPicturesResourcesIds.add(R.drawable.single_third);
+                listOfPicturesResourcesIds.add(R.drawable.single_fourth);
                 break;
             case DOUBLE_UNIT_MODULE:
-                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.drawable.double_unit_module_first);
-                //listOfPictures.add(currentFurniturePicture);
+                listOfPicturesResourcesIds.add(R.drawable.double_first);
+                listOfPicturesResourcesIds.add(R.drawable.double_second);
+                listOfPicturesResourcesIds.add(R.drawable.double_third);
+                listOfPicturesResourcesIds.add(R.drawable.double_fourth);
                 break;
             case TRIPLE_UNIT_MODULE:
-                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.drawable.triple_unit_module);
-                // listOfPictures.add(currentFurniturePicture);
+                listOfPicturesResourcesIds.add(R.drawable.triple_first);
+                listOfPicturesResourcesIds.add(R.drawable.triple_second);
+                listOfPicturesResourcesIds.add(R.drawable.triple_third);
+                listOfPicturesResourcesIds.add(R.drawable.triple_fourth);
                 break;
             case FOURTH_MODULE_UNIT:
-                currentFurniturePicture = BitmapFactory.decodeResource(getResources(), R.drawable.fourth_unit_module);
-                //listOfPictures.add(currentFurniturePicture);
+                listOfPicturesResourcesIds.add(R.drawable.fourth_first);
+                listOfPicturesResourcesIds.add(R.drawable.fourth_second);
+                listOfPicturesResourcesIds.add(R.drawable.fourth_third);
+                listOfPicturesResourcesIds.add(R.drawable.fourth_fourth);
                 bringToFront();
                 break;
         }
         setLayoutParams(furniture.getLayoutParams());
 
-        currentFurniturePicture = Bitmap.createScaledBitmap(currentFurniturePicture, furniture.getLayoutParams().width, furniture.getLayoutParams().height, true);
+        currentFurniturePicture = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(getResources(), listOfPicturesResourcesIds.get(0)),
+                furniture.getLayoutParams().width, furniture.getLayoutParams().height, true);
         furniturePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
         fitoPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -125,25 +134,20 @@ public class FurnitureView extends AppCompatImageView {
         invalidate();
     }
 
-    public void rotatePicture() {
-      /*  if (indexOfCurrentPicture == listOfPictures.size() - 1) {
+    public void changePicture() {
+        if (indexOfCurrentPicture == listOfPicturesResourcesIds.size() - 1) {
             indexOfCurrentPicture = 0;
             setCurrentFurniturePicture(indexOfCurrentPicture);
         } else {
             indexOfCurrentPicture++;
             setCurrentFurniturePicture(indexOfCurrentPicture);
-        }*/
-        Matrix matrix = new Matrix();
-
-        matrix.postRotate(90);
-
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(currentFurniturePicture, currentFurniturePicture.getWidth(), currentFurniturePicture.getHeight(), true);
-
-        currentFurniturePicture = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+        }
     }
 
     private void setCurrentFurniturePicture(int index) {
-        currentFurniturePicture = listOfPictures.get(index);
+        currentFurniturePicture = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(getResources(), listOfPicturesResourcesIds.get(index)),
+                furniture.getLayoutParams().width, furniture.getLayoutParams().height, true);
         invalidate();
     }
 }

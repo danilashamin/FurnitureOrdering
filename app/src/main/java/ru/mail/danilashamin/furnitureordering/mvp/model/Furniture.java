@@ -31,7 +31,7 @@ public class Furniture {
                 layoutParams.height = 200;
                 break;
             case DOUBLE_UNIT_MODULE:
-                layoutParams.width = 200;
+                layoutParams.width = 300;
                 layoutParams.height = 200;
                 break;
             case TRIPLE_UNIT_MODULE:

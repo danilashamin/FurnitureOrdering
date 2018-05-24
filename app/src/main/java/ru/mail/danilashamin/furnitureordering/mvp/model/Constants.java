@@ -33,9 +33,9 @@ public class Constants {
 
     public static final class Prices {
         public static final Double SINGLE_UNIT_MODULE = 3000D;
-        public static final Double DOUBLE_UNIT_MODULE = 90000D;
-        public static final Double TRIPLE_UNIT_MODULE = 150000D;
-        public static final Double FOURTH_UNIT_MODULE = 600D;
+        public static final Double DOUBLE_UNIT_MODULE = 6000D;
+        public static final Double TRIPLE_UNIT_MODULE = 9000D;
+        public static final Double FOURTH_UNIT_MODULE = 12000D;
     }
 
     public static final class Articles {
@@ -52,7 +52,7 @@ public class Constants {
     public static final class EMAIL {
         public static final String USERNAME = "suncoinfurnitureneworder@gmail.com";
         public static final String PASSWORD = "akofcNl7";
-        public static final String MAILTO = "shcherbakvadim@gmail.com";
+        public static final String MAILTO = "campufa@mail.ru";
         public static final String SUBJECT = "Новый заказ: \n";
 
     }

@@ -1,10 +1,14 @@
 package ru.mail.danilashamin.furnitureordering.mvp.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -329,9 +333,18 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void changeFurniturePicture(Furniture furniture) {
-        findFurnitureView(furniture).rotatePicture();
+        findFurnitureView(furniture).changePicture();
+        //vibrate();
     }
 
+    private void vibrate() {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(500);
+        }
+    }
 
     @OnClick(R.id.btnBuy)
     public void onBtnBuyClicked() {
