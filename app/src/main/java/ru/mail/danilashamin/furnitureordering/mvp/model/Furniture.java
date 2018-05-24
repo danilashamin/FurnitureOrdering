@@ -27,16 +27,16 @@ public class Furniture {
         layoutParams = new FrameLayout.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         switch (type) {
             case SINGLE_UNIT_MODULE:
-                layoutParams.width = 200;
-                layoutParams.height = 200;
+                layoutParams.width = 125;
+                layoutParams.height = 125;
                 break;
             case DOUBLE_UNIT_MODULE:
-                layoutParams.width = 300;
-                layoutParams.height = 200;
+                layoutParams.width = 250;
+                layoutParams.height = 150;
                 break;
             case TRIPLE_UNIT_MODULE:
-                layoutParams.width = 300;
-                layoutParams.height = 200;
+                layoutParams.width = 375;
+                layoutParams.height = 175;
                 break;
             case FOURTH_MODULE_UNIT:
                 layoutParams.width = 500;

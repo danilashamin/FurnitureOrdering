@@ -53,27 +53,27 @@ public class FurnitureView extends AppCompatImageView {
         switch (furniture.getType()) {
             case SINGLE_UNIT_MODULE:
                 listOfPicturesResourcesIds.add(R.drawable.single_first);
-                listOfPicturesResourcesIds.add(R.drawable.single_second);
+                //listOfPicturesResourcesIds.add(R.drawable.single_second);
                 listOfPicturesResourcesIds.add(R.drawable.single_third);
-                listOfPicturesResourcesIds.add(R.drawable.single_fourth);
+                //listOfPicturesResourcesIds.add(R.drawable.single_fourth);
                 break;
             case DOUBLE_UNIT_MODULE:
                 listOfPicturesResourcesIds.add(R.drawable.double_first);
-                listOfPicturesResourcesIds.add(R.drawable.double_second);
+                //listOfPicturesResourcesIds.add(R.drawable.double_second);
                 listOfPicturesResourcesIds.add(R.drawable.double_third);
-                listOfPicturesResourcesIds.add(R.drawable.double_fourth);
+               // listOfPicturesResourcesIds.add(R.drawable.double_fourth);
                 break;
             case TRIPLE_UNIT_MODULE:
                 listOfPicturesResourcesIds.add(R.drawable.triple_first);
-                listOfPicturesResourcesIds.add(R.drawable.triple_second);
+                //listOfPicturesResourcesIds.add(R.drawable.triple_second);
                 listOfPicturesResourcesIds.add(R.drawable.triple_third);
-                listOfPicturesResourcesIds.add(R.drawable.triple_fourth);
+                //listOfPicturesResourcesIds.add(R.drawable.triple_fourth);
                 break;
             case FOURTH_MODULE_UNIT:
                 listOfPicturesResourcesIds.add(R.drawable.fourth_first);
-                listOfPicturesResourcesIds.add(R.drawable.fourth_second);
+               //listOfPicturesResourcesIds.add(R.drawable.fourth_second);
                 listOfPicturesResourcesIds.add(R.drawable.fourth_third);
-                listOfPicturesResourcesIds.add(R.drawable.fourth_fourth);
+                //listOfPicturesResourcesIds.add(R.drawable.fourth_fourth);
                 bringToFront();
                 break;
         }
