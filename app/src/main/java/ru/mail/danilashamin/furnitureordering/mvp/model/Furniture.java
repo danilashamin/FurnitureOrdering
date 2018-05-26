@@ -1,10 +1,13 @@
 package ru.mail.danilashamin.furnitureordering.mvp.model;
 
+import android.support.annotation.DrawableRes;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import java.util.Locale;
+
+import ru.mail.danilashamin.furnitureordering.R;
 
 public class Furniture {
     private FurnitureType type;
@@ -24,27 +27,7 @@ public class Furniture {
     }
 
     private void initLayoutParams(FurnitureType type) {
-        layoutParams = new FrameLayout.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        switch (type) {
-            case SINGLE_UNIT_MODULE:
-                layoutParams.width = 125;
-                layoutParams.height = 125;
-                break;
-            case DOUBLE_UNIT_MODULE:
-                layoutParams.width = 250;
-                layoutParams.height = 150;
-                break;
-            case TRIPLE_UNIT_MODULE:
-                layoutParams.width = 375;
-                layoutParams.height = 175;
-                break;
-            case FOURTH_MODULE_UNIT:
-                layoutParams.width = 500;
-                layoutParams.height = 200;
-                break;
 
-        }
-        layoutParams.gravity = Gravity.CENTER;
     }
 
     public FurnitureType getType() {
@@ -63,7 +46,36 @@ public class Furniture {
         return price;
     }
 
-    public FrameLayout.LayoutParams getLayoutParams() {
+    public FrameLayout.LayoutParams getLayoutParams(@DrawableRes int idRes) {
+        layoutParams = new FrameLayout.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        switch (type) {
+            case SINGLE_UNIT_MODULE:
+                layoutParams.width = 125;
+                layoutParams.height = 125;
+                break;
+            case DOUBLE_UNIT_MODULE:
+                layoutParams.width = 250;
+                layoutParams.height = 150;
+                break;
+            case TRIPLE_UNIT_MODULE:
+                layoutParams.width = 375;
+                layoutParams.height = 175;
+                break;
+            case FOURTH_MODULE_UNIT:
+                switch (idRes) {
+                    default:
+                    case R.drawable.fourth_first:
+                        layoutParams.width = 500;
+                        layoutParams.height = 200;
+                        break;
+                    case R.drawable.fourth_third:
+                        layoutParams.width = 400;
+                        layoutParams.height = 200;
+                        break;
+                }
+                break;
+        }
+        layoutParams.gravity = Gravity.CENTER;
         return layoutParams;
     }
 
