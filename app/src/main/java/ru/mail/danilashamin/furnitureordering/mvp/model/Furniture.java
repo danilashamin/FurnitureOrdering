@@ -54,12 +54,30 @@ public class Furniture {
                 layoutParams.height = 125;
                 break;
             case DOUBLE_UNIT_MODULE:
-                layoutParams.width = 250;
-                layoutParams.height = 150;
+                switch (idRes) {
+                    case R.drawable.double_third:
+                        layoutParams.width = 175;
+                        layoutParams.height = 200;
+                        break;
+                    default:
+                    case R.drawable.double_first:
+                        layoutParams.width = 250;
+                        layoutParams.height = 150;
+                        break;
+                }
                 break;
             case TRIPLE_UNIT_MODULE:
-                layoutParams.width = 375;
-                layoutParams.height = 175;
+                switch (idRes) {
+                    default:
+                    case R.drawable.triple_third:
+                        layoutParams.width = 300;
+                        layoutParams.height = 225;
+                        break;
+                    case R.drawable.triple_first:
+                        layoutParams.width = 375;
+                        layoutParams.height = 175;
+                        break;
+                }
                 break;
             case FOURTH_MODULE_UNIT:
                 switch (idRes) {
