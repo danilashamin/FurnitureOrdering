@@ -1,7 +1,6 @@
 # FurnitureOrdering
 App for furniture ordering.
 
-P.S. Если вы вдруг внезапно попали на эту страницу, то знайте: этот проект то, что называется "горьким опытом начинающего разработчика".
-Когда заказчик хотел IKEA VR за 15000 рублей бюджета, получил это, и устроил кипишь, покрыл тебя толстым слоем животного кала, и тихонечно смотался.
+P.S. If you suddenly hit this page, then know that this project is what is called the "bitter experience of a novice developer." When the customer wanted IKEA VR for 15,000 rubles budget, got it, and arranged a boil, covered you with a thick layer of animal feces, and quietly rolled away.
 
-P.P.S. Нет, мне не стыдно.
+P.P.S. No, I'm not ashamed
